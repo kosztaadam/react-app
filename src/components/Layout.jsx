@@ -10,7 +10,7 @@ class Layout extends React.Component {
         return (
             <div>
                 <Nav/>
-                <SearchBarContainer artist={this.props.artist}/>
+                <SearchBarContainer artist={this.props.artist} />
                 <ArtistDetailsContainer artist={this.props.artist}/>
                 <Footer />
             </div>

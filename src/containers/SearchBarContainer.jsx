@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {setArtist} from '../actions/setArtist'
+import {getArtist} from '../actions/getArtist'
 import SearchBar from '../components/SearchBar';
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        setArtist: (newartist) => {
-            dispatch(setArtist(newartist));
+        getArtist: (newartist) => {
+            dispatch(getArtist(newartist));
         }
     }
 };

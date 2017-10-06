@@ -1,36 +1,5 @@
 import React from "react";
 
-/*class SearchBar extends React.Component {
-
- /*constructor(props) {
- super(props);
- // Set the videoList to empty array
- this.state = {
- artist: ""
- };
- }
-
- handleSubmit(event) {
- //TODO: call other component
- this.props.getArtist("Queen");
- }
-
- handleChange(event) {
- this.setState({artist: event.target.value});
- console.log(event.target.value);
- }
-
- render() {
- return (
- <div>
- <form onSubmit={() => this.handleSubmit()}>
- <input type="text" value={this.state.artist} onChange={() => this.handleChange()}/>
- </form>
- </div>
- )
- }
- }*/
-
 class SearchBar extends React.Component {
 
     constructor(props) {
@@ -42,9 +11,9 @@ class SearchBar extends React.Component {
     }
 
     handleSubmit(e) {
-        const {setArtist} = this.props;
+        const {getArtist} = this.props;
         e.preventDefault();
-        setArtist(this.state.value);
+        getArtist(this.state.value);
     }
 
     handleChange(event) {
@@ -52,15 +21,19 @@ class SearchBar extends React.Component {
     }
 
     render() {
-        const {artist} = this.props;
-        const actualArtist = artist[artist.length - 1];
+        let artistName = "";
+        if(this.props.artist.length > 0) {
+            artistName = this.props.artist[this.props.artist.length - 1].artistName;
+        }
+        //const actualArtist = this.props.artist[this.props.artist.length - 1];
 
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <input className="form-control" type="text" value={this.state.value} onChange={this.handleChange}/>
                 </form>
-                <p>{actualArtist}</p>
+                <p>Legutóbbi keresések: {artistName}</p>
+
             </div>
         );
     }

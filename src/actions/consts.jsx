@@ -1,4 +1,7 @@
 //{type:'ADD_TODO',text:'korte'}
 export const SET_ARTIST = 'SET_ARTIST';
 export const REMOVE_ARTIST = 'REMOVE_ARTIST';
-export const GET_ARTIST_DETAILS = 'GET_ARTIST_DETAILS';
+export const GET_ARTIST = 'GET_ARTIST';
+export const LOADING_ARTIST = 'LOADING_ARTIST';
+export const LOADING_ARTIST_FINISHED = 'LOADING_ARTIST_FINISHED';
+export const SET_ARTIST_DETAILS = 'SET_ARTIST_DETAILS';

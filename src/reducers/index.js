@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {SET_ARTIST, REMOVE_ARTIST, GET_ARTIST_DETAILS} from '../actions/consts';
+import {SET_ARTIST, SET_ARTIST_DETAILS, LOADING_ARTIST, LOADING_ARTIST_FINISHED} from '../actions/consts';
 
 /*function getArtist(artist) {
     $.ajax({
@@ -33,17 +33,25 @@ function artist(state = initialState , action) {
     switch(action.type) {
         case SET_ARTIST: {
             const newState = Object.assign([], state);
-            //newState.delete();
-            //let artistDetail = getArtist();
-            newState.push(action.artist);
-            //console.log("reducer");
-            //console.log(newState);
+            newState.push({
+                'artistName' : action.artistName
+            });
             return newState;
         }
-        case GET_ARTIST_DETAILS: {
+        case SET_ARTIST_DETAILS: {
             const newState = Object.assign([], state);
-            newState.push(action.data);
+            newState.push({
+                'artistName' : action.artistName,
+                'topAlbum' : action.topAlbum,
+                'similarArtist' : JSON.parse(action.similarArtist)
+            });
             return newState;
+        }
+        case LOADING_ARTIST: {
+            return action.loading;
+        }
+        case LOADING_ARTIST_FINISHED: {
+            return action.loading;
         }
         default:
             return state;
