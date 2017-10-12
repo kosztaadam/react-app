@@ -2,6 +2,8 @@ var graph = undefined;
 
 function renderGraph(simart, fisheyeEnable, highlightEnable) {
 
+    console.log("lefut");
+
     //set graph size and color
     var svg = d3.select("svg"),
         width = svg.attr("width"),
@@ -10,7 +12,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     //parse graph
-    if(graph === undefined)
+  //  if(graph === undefined)
         graph = JSON.parse(simart);
 
     var simulation = d3.forceSimulation()
@@ -52,10 +54,14 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
             .enter().append("g")
             .attr("class", "node")
             .on("click", function (d) {
-                if (d3.event.shiftKey) {
+                if (d3.event.shiftKey || d3.event.ctrlKey) {
+                    jQuery("#graphSearch").val(d.id);
+                    jQuery("#graphSearch").change();
+                   // getArtist(d.id);
+
                    // console.log("aa");
                     //location.href = '/artist/' + d.id;
-                    $("#artistname").text(d.id);
+                   /* $("#artistname").text(d.id);
                     $.get('/html/artist/' + d.id, function(res){
                         $("#artistinfo").html(res);
                     });
@@ -72,7 +78,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
                         }
 
                         update();
-                    });
+                    });*/
                 }
             })
             .call(d3.drag()

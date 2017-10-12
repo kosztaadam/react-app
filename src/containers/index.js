@@ -1,6 +1,6 @@
 import ArtistDetails from './ArtistDetailsContainer';
-import ArtistGraph from './ArtistGraph';
-import SpotifyPlayer from './SpotifyPlayer'
+import ArtistGraph from './ArtistGraphContainer';
+import SpotifyPlayer from './SpotifyPlayerContainer'
 
 export default ArtistDetails;
 export {

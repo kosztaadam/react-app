@@ -2,16 +2,20 @@ import React from 'react';
 import {Nav, Footer, SearchBar} from '/';
 import SearchBarContainer from "../containers/SearchBarContainer"
 import ArtistDetailsContainer from "../containers/ArtistDetailsContainer";
-import ArtistGraph from "../containers/ArtistGraph";
+import ArtistGraphContainer from "../containers/ArtistGraphContainer";
+import SpotifyPlayerContainer from "../containers/SpotifyPlayerContainer";
 
 class Layout extends React.Component {
 
     render() {
+
         return (
             <div>
                 <Nav/>
-                <SearchBarContainer artist={this.props.artist} />
-                <ArtistDetailsContainer artist={this.props.artist}/>
+                <SearchBarContainer artistName={this.props.artistName}/>
+                <ArtistDetailsContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
+                <ArtistGraphContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
+                <SpotifyPlayerContainer spotifyTrackID={this.props.spotifyTrackID}/>
                 <Footer />
             </div>
         );

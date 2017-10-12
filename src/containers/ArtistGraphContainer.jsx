@@ -1,10 +1,11 @@
 import {connect} from 'react-redux'
 import {getArtist} from '../actions/getArtist'
-import SearchBar from '../components/SearchBar'
+import ArtistGraph from '../components/ArtistGraph';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        artistName: state.artistName
+        artistDetails: state.artistDetails,
+        loading: state.loading.loading
     }
 };
 
@@ -16,9 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const SearchBarContainer = connect(
+const ArtistGraphContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchBar);
+)(ArtistGraph);
 
-export default SearchBarContainer
+export default ArtistGraphContainer

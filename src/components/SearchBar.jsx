@@ -22,17 +22,18 @@ class SearchBar extends React.Component {
 
     render() {
         let artistName = "";
-        if(this.props.artist.length > 0) {
-            artistName = this.props.artist[this.props.artist.length - 1].artistName;
+        console.log(this.props.artistName);
+        if(this.props.artistName.length > 0) {
+            artistName = this.props.artistName;
         }
         //const actualArtist = this.props.artist[this.props.artist.length - 1];
 
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input className="form-control" type="text" value={this.state.value} onChange={this.handleChange}/>
+                    <input id="search" className="form-control" type="text" value={this.state.value} onChange={this.handleChange}/>
                 </form>
-                <p>Legutóbbi keresések: {artistName}</p>
+                <p>Legutóbbi keresések: {artistName} </p>
 
             </div>
         );

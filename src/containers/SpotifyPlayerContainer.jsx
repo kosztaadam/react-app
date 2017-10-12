@@ -1,10 +1,10 @@
 import {connect} from 'react-redux'
+import SpotifyPlayer from '../components/SpotifyPlayer'
 import {getArtist} from '../actions/getArtist'
-import SearchBar from '../components/SearchBar'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        artistName: state.artistName
+        spotifyTrackID: state.spotifyTrackID
     }
 };
 
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const SearchBarContainer = connect(
+const SpotifyPlayerContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchBar);
+)(SpotifyPlayer);
 
-export default SearchBarContainer
+export default SpotifyPlayerContainer

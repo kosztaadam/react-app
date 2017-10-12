@@ -1,6 +1,7 @@
-import {loadingData, loadingDataSuccess} from "./loading";
-import {setArtist} from "./setArtist";
-import {setArtistDetails} from "./setArtistDetails";
+import {loadingData, loadingDataSuccess} from "./loading"
+import {setArtist} from "./setArtist"
+import {setArtistDetails} from "./setArtistDetails"
+import {getSpotifyArtist} from "./getSpotifyArtist"
 
 function fetchArtist(artistName) {
     const url = "http://localhost:5000/json/artist/" + artistName;
@@ -17,7 +18,8 @@ function fetchArtist(artistName) {
 export function getArtist(artistName) {
     return dispatch => {
         dispatch(loadingData());
-        dispatch(setArtist());
+        dispatch(setArtist(artistName));
+        dispatch(getSpotifyArtist(artistName));
         return fetchArtist(artistName)
             .then(data => {
                 dispatch(loadingDataSuccess());
