@@ -4,7 +4,8 @@ import {
     SET_ARTIST_DETAILS,
     LOADING_ARTIST,
     LOADING_ARTIST_FINISHED,
-    SET_SPOTIFY_ARTIST
+    SET_SPOTIFY_ARTIST,
+    SET_YOUTUBE_ARTIST
 } from '../actions/consts';
 
 /*function getArtist(artist) {
@@ -57,7 +58,7 @@ function loadingReducer(state = initialState, action) {
 function artistNameReducer(state = initialState, action) {
     switch (action.type) {
         case SET_ARTIST: {
-            console.log("setArtist");
+            // console.log("setArtist");
             const newState = Object.assign([], state);
             newState.push(action.artistName);
             return newState;
@@ -70,8 +71,22 @@ function artistNameReducer(state = initialState, action) {
 function spotifyTrackIDReducer(state = initialState, action) {
     switch (action.type) {
         case SET_SPOTIFY_ARTIST: {
-            console.log("spotifyArtistIDReducer");
-            console.log(action.trackID);
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
+            const newState = Object.assign([], state);
+            newState.push(action.trackID);
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
+function youtubeTrackIDReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_YOUTUBE_ARTIST: {
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
             const newState = Object.assign([], state);
             newState.push(action.trackID);
             return newState;
@@ -120,6 +135,7 @@ const artistApp = combineReducers({
     artistName: artistNameReducer,
     artistDetails: artistReducer,
     spotifyTrackID: spotifyTrackIDReducer,
+    youtubeTrackID: youtubeTrackIDReducer,
     loading: loadingReducer
 });
 

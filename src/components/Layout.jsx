@@ -4,6 +4,7 @@ import SearchBarContainer from "../containers/SearchBarContainer"
 import ArtistDetailsContainer from "../containers/ArtistDetailsContainer";
 import ArtistGraphContainer from "../containers/ArtistGraphContainer";
 import SpotifyPlayerContainer from "../containers/SpotifyPlayerContainer";
+import YouTubePlayerContainer from "../containers/YouTubePlayerContainer";
 
 class Layout extends React.Component {
 
@@ -16,6 +17,7 @@ class Layout extends React.Component {
                 <ArtistDetailsContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
                 <ArtistGraphContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
                 <SpotifyPlayerContainer spotifyTrackID={this.props.spotifyTrackID}/>
+                <YouTubePlayerContainer youtubeTrackID={this.props.youtubeTrackID}/>
                 <Footer />
             </div>
         );
