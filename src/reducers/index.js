@@ -60,7 +60,8 @@ function artistNameReducer(state = initialState, action) {
         case SET_ARTIST: {
             // console.log("setArtist");
             const newState = Object.assign([], state);
-            newState.push(action.artistName);
+            newState.indexOf(action.artistName) === -1 ? newState.push(action.artistName) : console.log("This item already exists");
+            //newState.push(action.artistName);
             return newState;
         }
         default:
@@ -74,6 +75,7 @@ function spotifyTrackIDReducer(state = initialState, action) {
             //console.log("spotifyArtistIDReducer");
             // console.log(action.trackID);
             const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
             newState.push(action.trackID);
             return newState;
         }
@@ -88,6 +90,7 @@ function youtubeTrackIDReducer(state = initialState, action) {
             //console.log("spotifyArtistIDReducer");
             // console.log(action.trackID);
             const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
             newState.push(action.trackID);
             return newState;
         }

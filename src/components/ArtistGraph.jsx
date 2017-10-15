@@ -58,10 +58,12 @@ class ArtistGraph extends React.Component {
         }
 
         return (
-            <div>
-                <svg id="graph" width="500" height="500"/>
+            <div className="row">
+                <div className="col-12">
+                    <svg id="graph"/>
+                </div>
                 {/*<input id="graphSearch" className="form-control" type="text" value={this.state.value}
-                       onChange={this.onTextInputChange}/>*/}
+                 onChange={this.onTextInputChange}/>*/}
             </div>
         )
     }

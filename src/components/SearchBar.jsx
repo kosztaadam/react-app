@@ -32,19 +32,16 @@ class SearchBar extends React.Component {
                 <li key={item} onClick={e => getArtist(item)}>{item}</li>
             );
         }
-        
-        return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input id="search" className="form-control" type="text" value={this.state.value}
-                           onChange={this.handleChange}/>
-                </form>
-                <p>Legutóbbi keresések:</p>
-                <ul>
-                    {listItems}
-                </ul>
 
-            </div>
+        return (
+            <form className="form-inline mt-2 mb-4 searchform" onSubmit={this.handleSubmit}>
+                <input className="form-control" type="text" placeholder="Keresés..." aria-label="Keresés"
+                       value={this.state.value}
+                       onChange={this.handleChange}/>
+                <button type="submit" className="submit">
+                    <span className="search_icon"/>
+                </button>
+            </form>
         );
     }
 }

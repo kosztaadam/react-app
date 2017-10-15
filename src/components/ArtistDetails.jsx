@@ -28,18 +28,31 @@ class ArtistDetails extends React.Component {
         console.log("frissul");
 
         return (
-            <div className="artistdetails m-3">
-                Előadó: {artistName} <br />
-                Legismertebb album: {topAlbum} <br />
-                Hasonló előadók:
-                <ul>{
-                    similarArtist.map(function (item) {
-                        if (item.group !== 1) {
-                            return;
-                        }
-                        return <li key={item.id} onClick={e => getArtist(item.id)}>{item.id}</li>
-                    })}
-                </ul>
+            <div className="row">
+                <div className="col-12">
+                    <h2>Előadó adatok</h2>
+                    <h3>{artistName}</h3>
+                </div>
+
+                <div className="col-12">
+                    <   hr className="line"/>
+                </div>
+
+                <div className="artistDetails col-12">
+                    <ul>
+                        <li>Legismertebb album: {topAlbum}</li>
+                        <li>Hasonló előadók:
+                            <ul>{
+                                similarArtist.map(function (item) {
+                                    if (item.group !== 1) {
+                                        return;
+                                    }
+                                    return <li key={item.id} onClick={e => getArtist(item.id)}>{item.id}</li>
+                                })}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         )
     }

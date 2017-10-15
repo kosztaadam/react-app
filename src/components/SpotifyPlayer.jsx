@@ -40,7 +40,7 @@ class SpotifyPlayer extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="col-5">
                 <div dangerouslySetInnerHTML={ this.iframe() }/>
             </div>
         )

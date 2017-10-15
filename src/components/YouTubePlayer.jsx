@@ -22,7 +22,7 @@ class YoutTubePlayer extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="col-7">
                 <div dangerouslySetInnerHTML={ this.iframe() }/>
             </div>
         )
