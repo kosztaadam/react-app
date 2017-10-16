@@ -4,19 +4,25 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
 
     console.log("lefut");
 
+    var $container = $('.graph'),
+        width = $container.width(),
+        height = $container.height();
+
     //set graph size and color
-    var svg = d3.select("svg"),
-        width = svg.attr("width"),
-        height = svg.attr("height");
+    var svg = d3.select('.graph').append("svg")
+        .attr("width", '100%')
+        .attr("height", '100%')
+        .attr('viewBox', '0 0 ' + Math.min(width, height) + ' ' + Math.min(width, height))
+        .attr('preserveAspectRatio', 'xMinYMin');
 
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     //parse graph
-  //  if(graph === undefined)
-        graph = JSON.parse(simart);
+    //  if(graph === undefined)
+    graph = JSON.parse(simart);
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function (d) {
+        .force("link", d3.forceLink().distance(100).id(function (d) {
             return d.id;
         }))
         .force("charge", d3.forceManyBody())
@@ -57,28 +63,28 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
                 if (d3.event.shiftKey || d3.event.ctrlKey) {
                     jQuery("#graphSearch").val(d.id);
                     jQuery("#graphSearch").change();
-                   // getArtist(d.id);
+                    // getArtist(d.id);
 
-                   // console.log("aa");
+                    // console.log("aa");
                     //location.href = '/artist/' + d.id;
-                   /* $("#artistname").text(d.id);
-                    $.get('/html/artist/' + d.id, function(res){
-                        $("#artistinfo").html(res);
-                    });
-                    $.get('/json/artist/' + d.id, function(res){
-                        var a = JSON.parse(res);
-                        for(var item in a.nodes) {
-                            if(findNode(a.nodes[item].id) == undefined)
-                                addNode(a.nodes[item].id, a.nodes[item].group + d.group);
-                        }
-                        for(var item in a.links) {
-                            if(findLink(a.links[item].source, a.links[item].target) == undefined)
-                                //console.log("asd");
-                                addLink(a.links[item].source, a.links[item].target);
-                        }
+                    /* $("#artistname").text(d.id);
+                     $.get('/html/artist/' + d.id, function(res){
+                     $("#artistinfo").html(res);
+                     });
+                     $.get('/json/artist/' + d.id, function(res){
+                     var a = JSON.parse(res);
+                     for(var item in a.nodes) {
+                     if(findNode(a.nodes[item].id) == undefined)
+                     addNode(a.nodes[item].id, a.nodes[item].group + d.group);
+                     }
+                     for(var item in a.links) {
+                     if(findLink(a.links[item].source, a.links[item].target) == undefined)
+                     //console.log("asd");
+                     addLink(a.links[item].source, a.links[item].target);
+                     }
 
-                        update();
-                    });*/
+                     update();
+                     });*/
                 }
             })
             .call(d3.drag()
@@ -88,10 +94,10 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
 
         node.append("circle")
             .attr("r", function (d) {
-                if(d.group == 0)
-                    return 9;
+                if (d.group == 0)
+                    return 12;
                 else
-                    return 7;
+                    return 10;
             })
             .attr("fill", function (d) {
                 return color(d.group);
@@ -195,7 +201,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
 
                 node.each(function (d) {
                     d.fisheye = fisheye(d);
-                    })
+                })
                     .attr("transform", function (d) {
                         return "translate(" + d.fisheye.x + "," + d.fisheye.y + ")";
                     })
@@ -286,7 +292,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
         }
     }
 
-    function findLink (source, target) {
+    function findLink(source, target) {
         for (var i in graph.links) {
             if (graph.links[i]["source"].id == source) {
                 if (graph.links[i]["target"].id == target) {

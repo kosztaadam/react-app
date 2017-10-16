@@ -34,13 +34,13 @@ class SpotifyPlayer extends React.Component {
         console.log(trackID);
 
         return {
-            __html: '<iframe src="https://open.spotify.com/embed?uri=spotify:track:' + trackID + '" width="300" height="100" frameborder="0" allowtransparency="true"></iframe>'
+            __html: '<iframe src="https://open.spotify.com/embed?uri=spotify:track:' + trackID + '" width="90%" height="150" frameborder="0" allowtransparency="true"></iframe>'
         }
     }
 
     render() {
         return (
-            <div className="col-5">
+            <div className="col-lg-5 col-md-12 text-center">
                 <div dangerouslySetInnerHTML={ this.iframe() }/>
             </div>
         )

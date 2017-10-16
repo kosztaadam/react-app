@@ -51,17 +51,21 @@ class ArtistGraph extends React.Component {
             similarArtist = JSON.stringify(similarArtist);
 
             let embedCode = '<script type="text/javascript">renderGraph(' + similarArtist + ', false, false); </script>';
-            $('#graph').empty();
-            $('#graph').append(embedCode);
+            $('.graph').fadeIn();
+            $('.graph').empty();
+            $('.graph').append(embedCode);
             //window.renderGraphFromReact(similarArtist);
             //renderGraph(similarArtist, false, false);
         }
 
         return (
             <div className="row">
-                <div className="col-12">
-                    <svg id="graph"/>
+                <div className="col-12 graph">
                 </div>
+                <div className="col-12">
+                    <hr className="line"/>
+                </div>
+
                 {/*<input id="graphSearch" className="form-control" type="text" value={this.state.value}
                  onChange={this.onTextInputChange}/>*/}
             </div>

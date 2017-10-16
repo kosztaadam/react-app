@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
     }
 
     render() {
-        const {getArtist} = this.props;
+        /*        const {getArtist} = this.props;
 
         let artistName = "";
         let listItems = "";
@@ -31,11 +31,11 @@ class SearchBar extends React.Component {
             listItems = artistName.map((item) =>
                 <li key={item} onClick={e => getArtist(item)}>{item}</li>
             );
-        }
+        }*/
 
         return (
             <form className="form-inline mt-2 mb-4 searchform" onSubmit={this.handleSubmit}>
-                <input className="form-control" type="text" placeholder="Keresés..." aria-label="Keresés"
+                <input className="form-control" type="text" id="searchInput" placeholder="Keresés..." aria-label="Keresés"
                        value={this.state.value}
                        onChange={this.handleChange}/>
                 <button type="submit" className="submit">

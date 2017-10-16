@@ -4,6 +4,17 @@ import SearchBarContainer from "../containers/SearchBarContainer";
 class Nav extends React.Component {
 
     render() {
+        const {getArtist} = this.props;
+
+        let artistName = "";
+        let listItems = "";
+        if (this.props.artistName.length > 0) {
+            artistName = this.props.artistName;
+            listItems = artistName.map((item) =>
+                <li className="searchedArtist" key={item} onClick={e => getArtist(item)}>{item}</li>
+            );
+        }
+
         return (
             <div className="left_sidebar">
                 <nav>
@@ -82,6 +93,11 @@ class Nav extends React.Component {
                         </ul>
 
                         <hr className="line"/>
+
+                        <ul className="navbar-nav mr-auto">
+                            <li className="title">Előző keresések</li>
+                            {listItems}
+                        </ul>
 
                     </div>
                 </nav>

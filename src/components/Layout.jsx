@@ -1,5 +1,6 @@
 import React from 'react';
 import {Nav, Footer} from '/';
+import NavContainer from "../containers/NavContainer"
 import ArtistDetailsContainer from "../containers/ArtistDetailsContainer";
 import ArtistGraphContainer from "../containers/ArtistGraphContainer";
 import SpotifyPlayerContainer from "../containers/SpotifyPlayerContainer";
@@ -12,9 +13,9 @@ class Layout extends React.Component {
         return (
             <div className="row">
                 <div className="col-lg-3 col-md-12">
-                    <Nav artistName={this.props.artistName}/>
+                    <NavContainer artistName={this.props.artistName}/>
                 </div>
-                <div className="col-9 mt-2">
+                <div className="col-lg-9 col-md-12 mt-2">
                     <ArtistDetailsContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
                     <ArtistGraphContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
                     <div className="row">

@@ -16,13 +16,13 @@ class YoutTubePlayer extends React.Component {
         console.log(youtubeID);
 
         return {
-            __html: '<iframe width="420" height="315" src="https://www.youtube.com/embed/' + youtubeID + '"></iframe>'
+            __html: '<iframe width="90%" height="400" src="https://www.youtube.com/embed/' + youtubeID + '"></iframe>'
         }
     }
 
     render() {
         return (
-            <div className="col-7">
+            <div className="col-lg-7 col-md-12 text-center">
                 <div dangerouslySetInnerHTML={ this.iframe() }/>
             </div>
         )
