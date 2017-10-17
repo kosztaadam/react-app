@@ -13,9 +13,16 @@ class ArtistDetails extends React.Component {
     }
 
     render() {
-        const {getArtist, artistDetails} = this.props;
+        const {getArtist, artistDetails, spotifyArtistDetails} = this.props;
 
-        let artistName, topAlbum = "";
+        let popularity = 0;
+        let popularityClass = "c100 dark green small";
+        if (spotifyArtistDetails !== undefined) {
+            popularity = spotifyArtistDetails.popularity;
+            popularityClass += " p" + spotifyArtistDetails.popularity;
+        }
+
+        let artistName, topAlbum, artistImage = "";
         let similarArtist = [];
 
         if (artistDetails.length > 0) {
@@ -23,26 +30,50 @@ class ArtistDetails extends React.Component {
             artistName = artistDetails[lastArtistItem].artistName;
             topAlbum = artistDetails[lastArtistItem].topAlbum;
             similarArtist = JSON.parse(artistDetails[lastArtistItem].similarArtist).nodes;
+            artistImage = artistDetails[lastArtistItem].artistImage;
         }
 
         console.log("frissul");
+        console.log(spotifyArtistDetails);
+        console.log(popularityClass);
 
         return (
             <div className="row">
-                <div className="col-12">
-                    <h2>Előadó adatok</h2>
+                <div className="col-8">
+                    <h2 className="mb-3">Előadó adatok</h2>
                     <h3>{artistName}</h3>
                 </div>
-
-                <div className="col-12">
-                    <   hr className="line"/>
+                <div className="col-4 popularity">
+                    <p className="popularity_text mr-3">Népszerűség: </p>
+                    <div className={popularityClass}>
+                        <span>{popularity}</span>
+                        <div className="slice">
+                            <div className="bar"/>
+                            <div className="fill"/>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="artistDetails col-12">
+                <div className="col-12">
+                    <hr className="line"/>
+                </div>
+
+                <div className="col-4">
+                    <img src={artistImage} alt={artistName} width="100%"/>
+                </div>
+                <div className="artistDetails col-8">
                     <ul>
+                        <li>Címkék:
+                            <ul className="tags">
+                                <li className="list-item">Rock</li>
+                                <li className="list-item">Pop</li>
+                                <li className="list-item">Muzsika</li>
+                            </ul>
+                        </li>
+                        <div className="clearfix"></div>
                         <li>Legismertebb album: {topAlbum}</li>
                         <li>Hasonló előadók:
-                            <ul>{
+                            <ul className="similar_artist">{
                                 similarArtist.map(function (item) {
                                     if (item.group !== 1) {
                                         return;

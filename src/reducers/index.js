@@ -4,7 +4,8 @@ import {
     SET_ARTIST_DETAILS,
     LOADING_ARTIST,
     LOADING_ARTIST_FINISHED,
-    SET_SPOTIFY_ARTIST,
+    SET_SPOTIFY_TRACK,
+    SET_SPOTIFY_ARTIST_DETAILS,
     SET_YOUTUBE_ARTIST
 } from '../actions/consts';
 
@@ -69,14 +70,24 @@ function artistNameReducer(state = initialState, action) {
     }
 }
 
-function spotifyTrackIDReducer(state = initialState, action) {
+function spotifyReducer(state = initialState, action) {
     switch (action.type) {
-        case SET_SPOTIFY_ARTIST: {
+        case SET_SPOTIFY_TRACK: {
             //console.log("spotifyArtistIDReducer");
             // console.log(action.trackID);
             const newState = Object.assign([], state);
             //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
             newState.push(action.trackID);
+            return newState;
+        }
+        case SET_SPOTIFY_ARTIST_DETAILS: {
+            console.log("spotifyyyy");
+            //console.log(action.spotifyArtistDetails);
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
+            newState.artistDetails = action.spotifyArtistDetails;
             return newState;
         }
         default:
@@ -106,7 +117,8 @@ function artistReducer(state = initialState, action) {
             newState.push({
                 'artistName': action.artistName,
                 'topAlbum': action.topAlbum,
-                'similarArtist': action.similarArtist
+                'similarArtist': action.similarArtist,
+                'artistImage' : action.artistImage
             });
             return newState;
         }
@@ -137,7 +149,8 @@ function artistReducer(state = initialState, action) {
 const artistApp = combineReducers({
     artistName: artistNameReducer,
     artistDetails: artistReducer,
-    spotifyTrackID: spotifyTrackIDReducer,
+    spotifyArtistDetails: spotifyReducer,
+    spotifyTrackID: spotifyReducer,
     youtubeTrackID: youtubeTrackIDReducer,
     loading: loadingReducer
 });

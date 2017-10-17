@@ -1,4 +1,6 @@
-import {setSpotifyArtist} from "./setSpotifyArtist";
+import {setSpotifyTrack} from "./setSpotifyTrack";
+import {setSpotifyArtistDetails} from "./setSpotifyArtistDetails";
+
 
 function fetchArtist(artistName) {
     const url = "http://localhost:5000/spotify/" + artistName;
@@ -16,7 +18,8 @@ export function getSpotifyArtist(artistName) {
     return dispatch => {
         return fetchArtist(artistName)
             .then(data => {
-                dispatch(setSpotifyArtist(data))
+                dispatch(setSpotifyTrack(data));
+                dispatch(setSpotifyArtistDetails(data))
             })
             .catch(error => {
                 throw error;

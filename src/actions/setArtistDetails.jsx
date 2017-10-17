@@ -7,6 +7,7 @@ export function setArtistDetails(data) {
         type: SET_ARTIST_DETAILS,
         artistName: artist.artist,
         topAlbum: artist.artistTopAlbum,
-        similarArtist: artist.similarArtistsList
+        similarArtist: artist.similarArtistsList,
+        artistImage: artist.artistImage
     }
 }

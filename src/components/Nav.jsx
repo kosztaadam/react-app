@@ -51,7 +51,7 @@ class Nav extends React.Component {
                             <li className="form-group">
                                 <label htmlFor="artist_number">Hasonló előadók száma</label>
                                 <p className="small red warning">Figyelem! Magas érték választása növelheti az
-                                    oldalbetöltés
+                                    oldalbetöltésnp
                                     idejét!</p>
                                 <select className="form-control artist_select" id="artist_number">
                                     <option value="1">1</option>

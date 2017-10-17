@@ -21,12 +21,42 @@ body {
 
 .artistDetails li {
     list-style: none;
-    margin-left: -1rem;
 }
+
+.artistDetails .tags li:before {
+    content: "";
+    display: block;
+}
+
+.artistDetails .tags .list-item {
+    float: left;
+    padding: 5px;
+    background-color: blue;
+    margin-right: 10px;
+    cursor:pointer;
+}
+
+.artistDetails .tags .list-item:first-child {
+    background: #000;
+}
+
+.artistDetails .tags .list-item:last-child {
+    background: #307bbb;
+}
+
 
 .artistDetails li:before {
     content: "\f105";
     font-family: 'FontAwesome', serif;
     display: inline-block;
     width: 1.2em;
+}
+
+.similar_artist li {
+    cursor: pointer;
+}
+
+.popularity {
+    display: flex;
+    justify-content: flex-end;
 }
