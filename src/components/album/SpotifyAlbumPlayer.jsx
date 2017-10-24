@@ -5,20 +5,21 @@ class SpotifyAlbumPlayer extends React.Component {
 
     iframe() {
         let albumID = "";
+        let playlist = false;
         let itemNumber = this.props.spotifyAlbumID.length;
 
         if (itemNumber > 0) {
-            albumID = this.props.spotifyAlbumID[itemNumber - 1];
+            albumID = this.props.spotifyAlbumID[itemNumber - 1].id;
+            playlist = this.props.spotifyAlbumID[itemNumber - 1].playlist;
         }
-
-        console.log("-------------++++++++++++++++");
-        console.log(albumID);
 
         let insertCode = "";
 
         if (albumID === "")
             return {__html: ''};
-        else {
+        else if(playlist) {
+            insertCode = '<iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:' + albumID + '" width="90%" height="460" frameborder="0" allowtransparency="true"></iframe>'
+        } else {
             insertCode = '<div class="col-12 mb-2 spotify-item">' +
                 '<iframe src="https://open.spotify.com/embed?uri=spotify:album:' + albumID + '" width="90%" height="460" frameborder="0" allowtransparency="true"></iframe>' +
                 '</div>'

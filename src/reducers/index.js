@@ -95,7 +95,10 @@ function spotifyAlbumReducer(state = initialState, action) {
             // console.log(action.trackID);
             const newState = Object.assign([], state);
             //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
-            newState.push(action.albumID);
+            newState.push({
+                'id' : action.albumID,
+                'playlist': action.playlist
+            });
             return newState;
         }
         case SET_SPOTIFY_ALBUM_DETAILS: {
