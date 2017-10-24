@@ -11,6 +11,8 @@ export function setArtistDetails(data) {
         artistImage: artist.artistImage,
         artistPlayCount: artist.artistPlayCount,
         artistListeners: artist.artistListeners,
-        artistTags: artist.artistTags
+        artistTags: artist.artistTags,
+        limit: artist.limit,
+        deep: artist.deep
     }
 }

@@ -4,8 +4,9 @@ import {setArtistDetails} from "./setArtistDetails"
 import {getSpotifyArtist} from "./getSpotifyArtist"
 import {getYoutubeArtist} from "./getYoutubeArtist"
 
-function fetchArtist(artistName) {
-    const url = "http://localhost:5000/json/artist/" + artistName;
+function fetchArtist(artistName, similarArtistNumber, depthNumber) {
+    const url = "http://localhost:5000/json/artist/" + artistName + "/" + similarArtistNumber + "/" + depthNumber;
+    console.log(url);
 
     return fetch(url)
         .then(response => {
@@ -16,13 +17,13 @@ function fetchArtist(artistName) {
         });
 }
 
-export function getArtist(artistName) {
+export function getArtist(artistName, similarArtistNumber, depthNumber) {
     return dispatch => {
         dispatch(loadingData());
         dispatch(setArtist(artistName));
         dispatch(getSpotifyArtist(artistName));
         dispatch(getYoutubeArtist(artistName));
-        return fetchArtist(artistName)
+        return fetchArtist(artistName, similarArtistNumber, depthNumber)
             .then(data => {
                 dispatch(loadingDataSuccess());
                 dispatch(setArtistDetails(data))

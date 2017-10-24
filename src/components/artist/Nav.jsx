@@ -31,7 +31,7 @@ class Nav extends React.Component {
 
                         <SearchBarContainer artistName={this.props.artistName}/>
 
-                        <ul className="navbar-nav mr-auto">
+                        <ul className="navbar-nav menu mr-auto">
                             <li className="title">Keresési témák</li>
                             <li className="nav-item active">
                                 <a className="nav-link" href="/eloadok">Előadók</a>
@@ -41,38 +41,6 @@ class Nav extends React.Component {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Számok</a>
-                            </li>
-                        </ul>
-
-                        <hr className="line"/>
-
-                        <ul className="navbar-nav mr-auto">
-                            <li className="title">Keresés beállítások</li>
-                            <li className="form-group">
-                                <label htmlFor="artist_number">Hasonló előadók száma</label>
-                                <p className="small red warning">Figyelem! Magas érték választása növelheti az
-                                    oldalbetöltésnp
-                                    idejét!</p>
-                                <select className="form-control artist_select" id="artist_number">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </li>
-                            <li className="form-group">
-                                <label htmlFor="artist_depth">Keresési mélység</label>
-                                <p className="small red warning">Figyelem! Magas érték választása növelheti az
-                                    oldalbetöltés
-                                    idejét!</p>
-                                <select className="form-control artist_select" id="artist_depth">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
                             </li>
                         </ul>
 

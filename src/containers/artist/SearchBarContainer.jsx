@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getArtist: (newartist) => {
-            dispatch(getArtist(newartist));
+        getArtist: (newartist, similar, depth) => {
+            dispatch(getArtist(newartist, similar, depth));
         }
     }
 };

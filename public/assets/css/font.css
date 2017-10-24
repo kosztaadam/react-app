@@ -26,6 +26,7 @@ h3 {
 
 .warning {
     display: none;
+    width: 100%;
 }
 
 .popularity_text {

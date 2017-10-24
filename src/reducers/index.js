@@ -96,7 +96,7 @@ function spotifyAlbumReducer(state = initialState, action) {
             const newState = Object.assign([], state);
             //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
             newState.push({
-                'id' : action.albumID,
+                'id': action.albumID,
                 'playlist': action.playlist
             });
             return newState;
@@ -144,7 +144,9 @@ function artistReducer(state = initialState, action) {
                 'artistImage': action.artistImage,
                 'artistListeners': action.artistListeners,
                 'artistPlayCount': action.artistPlayCount,
-                'artistTags': action.artistTags
+                'artistTags': action.artistTags,
+                'deep': action.deep,
+                'limit': action.limit
             });
             return newState;
         }

@@ -126,6 +126,10 @@
     font-family: FontAwesome;
 }
 
+.navbar-nav {
+    width: 100%;
+}
+
 .navbar-nav .title {
     padding-left: 10px;
     padding-right: 5px;
@@ -138,6 +142,10 @@
 }
 
 .navbar-nav li {
+    border-radius: 0.25rem;
+}
+
+.navbar-nav.menu li {
     padding-left: 10px;
     border-radius: 0.25rem;
 }
@@ -188,4 +196,11 @@
     color: #eeeeee;
     background-color: #434857;
     border-color: #434857;
+}
+
+.btn-submit {
+    color: #eeeeee;
+    background-color: #434857;
+    border-color: #434857;
+    cursor: pointer;
 }

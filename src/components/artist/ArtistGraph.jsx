@@ -3,42 +3,42 @@ import $ from 'jquery';
 
 class ArtistGraph extends React.Component {
 
-   /* constructor(props) {
-        super(props);
-        this.state = {value: ''};
+    /* constructor(props) {
+     super(props);
+     this.state = {value: ''};
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+     this.handleSubmit = this.handleSubmit.bind(this);
+     }
 
-    shouldComponentUpdate() {
-        if (this.props.loading || this.props.loading === undefined) {
-            return false;
-        }
+     shouldComponentUpdate() {
+     if (this.props.loading || this.props.loading === undefined) {
+     return false;
+     }
 
-        return true;
-    }
+     return true;
+     }
 
-    handleSubmit(e) {
-        const {getArtist} = this.props;
-        e.preventDefault();
-        console.log(this.state.value);
-        // getArtist(this.state.value);
-    }
+     handleSubmit(e) {
+     const {getArtist} = this.props;
+     e.preventDefault();
+     console.log(this.state.value);
+     // getArtist(this.state.value);
+     }
 
-    onTextInputChange(event) {
-        console.log("handlechange");
-        console.log(event.target.value);
-        //this.setState({value: event.target.value});
+     onTextInputChange(event) {
+     console.log("handlechange");
+     console.log(event.target.value);
+     //this.setState({value: event.target.value});
 
-        let newText = event.target.value;
-        return this.setState({value: newText});
-    }
+     let newText = event.target.value;
+     return this.setState({value: newText});
+     }
 
-    componentWillMount() {
-        // Code to get your data into variable 'defaultTextValue'
-        console.log("mount");
-        this.setState({textInputValue: 'default'});
-    }*/
+     componentWillMount() {
+     // Code to get your data into variable 'defaultTextValue'
+     console.log("mount");
+     this.setState({textInputValue: 'default'});
+     }*/
 
     render() {
         //console.log("graph bejott");
@@ -49,6 +49,15 @@ class ArtistGraph extends React.Component {
             const lastArtistItem = artistDetails.length - 1;
             similarArtist = artistDetails[lastArtistItem].similarArtist;
             similarArtist = JSON.stringify(similarArtist);
+
+            if (artistDetails[lastArtistItem].limit > 4 || artistDetails[lastArtistItem].deep > 4) {
+                $('.graph').css({'height': '1000px'});
+            }
+            else if (artistDetails[lastArtistItem].limit > 3 || artistDetails[lastArtistItem].deep > 3) {
+                $('.graph').css({'height': '800px'});
+            } else {
+                $('.graph').css({'height': '400px'});
+            }
 
             let embedCode = '<script type="text/javascript">renderGraph(' + similarArtist + ', false, false); </script>';
             $('.graph').fadeIn();
