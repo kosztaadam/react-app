@@ -1,4 +1,4 @@
-import {SET_SPOTIFY_TRACK} from './consts';
+import {SET_SPOTIFY_TRACK} from '../consts';
 
 export function setSpotifyTrack(spotifyDetails) {
     var data = JSON.parse(spotifyDetails);

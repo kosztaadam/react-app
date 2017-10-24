@@ -16,7 +16,7 @@ class YoutTubePlayer extends React.Component {
         console.log(youtubeID);
 
         return {
-            __html: '<iframe width="90%" height="400" src="https://www.youtube.com/embed/' + youtubeID + '"></iframe>'
+            __html: '<iframe width="90%" height="460" src="https://www.youtube.com/embed/' + youtubeID + '"></iframe>'
         }
     }
 

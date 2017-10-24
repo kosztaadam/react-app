@@ -1,4 +1,4 @@
-import {SET_ARTIST} from './consts';
+import {SET_ARTIST} from '../consts';
 
 export function setArtist(artistName) {
     return {

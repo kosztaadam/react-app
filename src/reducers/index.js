@@ -6,49 +6,26 @@ import {
     LOADING_ARTIST_FINISHED,
     SET_SPOTIFY_TRACK,
     SET_SPOTIFY_ARTIST_DETAILS,
-    SET_YOUTUBE_ARTIST
+    SET_YOUTUBE_ARTIST,
+    SET_ALBUM,
+    SET_ALBUM_DETAILS, SET_SPOTIFY_ALBUM_DETAILS, SET_SPOTIFY_ALBUM
 } from '../actions/consts';
 
-/*function getArtist(artist) {
- $.ajax({
- url: 'http://localhost:5000/json/artist/' + artist,
- beforeSend: function () {
- $(".artistdetails").hide();
- $(".spinner").fadeIn();
- }
- })
- .done(function (res) {
- let parsedRes = JSON.parse(res);
- let similarArtist = JSON.parse(parsedRes.similarArtistsList);
- let artist = parsedRes.artist;
- let topAlbum = parsedRes.artistTopAlbum;
- //this.setState({artist, topAlbum, entries: similarArtist.nodes});
- return ({
- 'artist': artist,
- 'topAlbum': topAlbum,
- 'entries': similarArtist.nodes
- });
- }.bind(this))
- .fail(function (e) {
- console.log("getArtist ajax error");
- console.log(e);
- });
- }*/
-
 const initialState = [];
+const loadingInitialState = ['success'];
 
-function loadingReducer(state = initialState, action) {
+function loadingReducer(state = loadingInitialState, action) {
     switch (action.type) {
         case LOADING_ARTIST: {
-            console.log("recude loaading " + action.loading);
+            //console.log("recude loaading " + action.loading);
             const newState = Object.assign([], state);
-            newState.loading = action.loading;
+            newState[0] = action.loading;
             return newState;
         }
         case LOADING_ARTIST_FINISHED: {
-            console.log("recude finished " + action.loading);
+            // console.log("recude finished " + action.loading);
             const newState = Object.assign([], state);
-            newState.loading = action.loading;
+            newState[0] = action.loading;
             return newState;
         }
         default:
@@ -70,6 +47,22 @@ function artistNameReducer(state = initialState, action) {
     }
 }
 
+function albumNameReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_ALBUM: {
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.albumName) === -1 ? newState.push(action.albumName) : console.log("This item already exists");
+            newState.push({
+                'artistName': action.artistName,
+                'albumName': action.albumName
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
 function spotifyReducer(state = initialState, action) {
     switch (action.type) {
         case SET_SPOTIFY_TRACK: {
@@ -81,7 +74,7 @@ function spotifyReducer(state = initialState, action) {
             return newState;
         }
         case SET_SPOTIFY_ARTIST_DETAILS: {
-            console.log("spotifyyyy");
+            //  console.log("spotifyyyy");
             //console.log(action.spotifyArtistDetails);
             //console.log("spotifyArtistIDReducer");
             // console.log(action.trackID);
@@ -94,6 +87,32 @@ function spotifyReducer(state = initialState, action) {
             return state;
     }
 }
+
+function spotifyAlbumReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_SPOTIFY_ALBUM: {
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
+            newState.push(action.albumID);
+            return newState;
+        }
+        case SET_SPOTIFY_ALBUM_DETAILS: {
+            //  console.log("spotifyyyy");
+            //console.log(action.spotifyArtistDetails);
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
+            newState.albumDetails = action.spotifyAlbumDetails;
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
 
 function youtubeTrackIDReducer(state = initialState, action) {
     switch (action.type) {
@@ -113,12 +132,16 @@ function youtubeTrackIDReducer(state = initialState, action) {
 function artistReducer(state = initialState, action) {
     switch (action.type) {
         case SET_ARTIST_DETAILS: {
+            //alert(action.artistTags);
             const newState = Object.assign([], state);
             newState.push({
                 'artistName': action.artistName,
                 'topAlbum': action.topAlbum,
                 'similarArtist': action.similarArtist,
-                'artistImage' : action.artistImage
+                'artistImage': action.artistImage,
+                'artistListeners': action.artistListeners,
+                'artistPlayCount': action.artistPlayCount,
+                'artistTags': action.artistTags
             });
             return newState;
         }
@@ -146,12 +169,40 @@ function artistReducer(state = initialState, action) {
      return state;*/
 }
 
+function albumReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_ALBUM_DETAILS: {
+            //alert(action.artistTags);
+            const newState = Object.assign([], state);
+            newState.push({
+                'artistName': action.artistName,
+                'albumName': action.albumName,
+                'albumImage': action.albumImage,
+                'albumListeners': action.albumListeners,
+                'albumPlayCount': action.albumPlayCount,
+                'albumTracks': action.albumTracks,
+                'albumTags': action.albumTags,
+                'wiki': action.wiki
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
 const artistApp = combineReducers({
     artistName: artistNameReducer,
     artistDetails: artistReducer,
     spotifyArtistDetails: spotifyReducer,
     spotifyTrackID: spotifyReducer,
     youtubeTrackID: youtubeTrackIDReducer,
+
+    albumName: albumNameReducer,
+    albumDetails: albumReducer,
+    spotifyAlbumDetails: spotifyAlbumReducer,
+    spotifyAlbumID: spotifyAlbumReducer,
+
     loading: loadingReducer
 });
 

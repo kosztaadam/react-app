@@ -30,20 +30,30 @@ body {
 
 .artistDetails .tags .list-item {
     float: left;
-    padding: 5px;
-    background-color: blue;
-    margin-right: 10px;
-    cursor:pointer;
+    padding: 5px 10px;
+    margin: 5px 10px 5px 5px;
+    cursor: pointer;
 }
 
-.artistDetails .tags .list-item:first-child {
-    background: #000;
+.artistDetails .tags .list-item.color-1 {
+    background-color: #307bbb;
 }
 
-.artistDetails .tags .list-item:last-child {
-    background: #307bbb;
+.artistDetails .tags .list-item.color-2 {
+    background-color: #4db53c;
 }
 
+.artistDetails .tags .list-item.color-3 {
+    background-color: #8c93a6;
+}
+
+.artistDetails .tags .list-item.color-4 {
+    background-color: #dd9d22;
+}
+
+.artistDetails .tags .list-item.color-5 {
+    background-color: #cfd2da;
+}
 
 .artistDetails li:before {
     content: "\f105";
@@ -59,4 +69,10 @@ body {
 .popularity {
     display: flex;
     justify-content: flex-end;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

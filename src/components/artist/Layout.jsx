@@ -1,10 +1,11 @@
 import React from 'react';
-import {Nav, Footer} from '/';
-import NavContainer from "../containers/NavContainer"
-import ArtistDetailsContainer from "../containers/ArtistDetailsContainer";
-import ArtistGraphContainer from "../containers/ArtistGraphContainer";
-import SpotifyPlayerContainer from "../containers/SpotifyPlayerContainer";
-import YouTubePlayerContainer from "../containers/YouTubePlayerContainer";
+import Footer from '../Footer';
+import NavContainer from "../../containers/artist/NavContainer"
+import ArtistDetailsContainer from "../../containers/artist/ArtistDetailsContainer";
+import ArtistGraphContainer from "../../containers/artist/ArtistGraphContainer";
+import SpotifyPlayerContainer from "../../containers/artist/SpotifyPlayerContainer";
+import YouTubePlayerContainer from "../../containers/artist/YouTubePlayerContainer";
+import LoadingContainer from "../../containers/artist/LoadingContainer";
 
 class Layout extends React.Component {
 
@@ -15,15 +16,17 @@ class Layout extends React.Component {
                 <div className="col-lg-3 col-md-12">
                     <NavContainer artistName={this.props.artistName}/>
                 </div>
-                <div className="col-lg-9 col-md-12 mt-2">
+                <div className="col-lg-9 col-md-12 mt-2 right_container">
                     <ArtistDetailsContainer artistDetails={this.props.artistDetails}
-                                            loading={this.props.loading}
                                             spotifyArtistDetails={this.props.spotifyArtistDetails}/>
-                    <ArtistGraphContainer artistDetails={this.props.artistDetails} loading={this.props.loading}/>
+                    <ArtistGraphContainer artistDetails={this.props.artistDetails}/>
                     <div className="row">
                         <SpotifyPlayerContainer spotifyTrackID={this.props.spotifyTrackID}/>
                         <YouTubePlayerContainer youtubeTrackID={this.props.youtubeTrackID}/>
                     </div>
+                </div>
+                <div className="col-lg-9 col-md-12 mt-2 loading">
+                    <LoadingContainer loading={this.props.loading}/>
                 </div>
                 <div className="col-12 mt-5">
                     <Footer />

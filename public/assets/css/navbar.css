@@ -94,6 +94,17 @@
     background: transparent;
 }
 
+.submit_2 {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    padding: 9px 10px;
+    color: #9198aa;
+    border: 0;
+    line-height: 0;
+    background: transparent;
+}
+
 .search_icon {
     box-shadow: none;
 }

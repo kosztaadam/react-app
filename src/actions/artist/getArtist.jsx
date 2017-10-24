@@ -1,4 +1,4 @@
-import {loadingData, loadingDataSuccess} from "./loading"
+import {loadingData, loadingDataSuccess} from "../loading"
 import {setArtist} from "./setArtist"
 import {setArtistDetails} from "./setArtistDetails"
 import {getSpotifyArtist} from "./getSpotifyArtist"

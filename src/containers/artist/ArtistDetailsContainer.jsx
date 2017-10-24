@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
-import {getArtist} from '../actions/getArtist'
-import ArtistDetails from '../components/ArtistDetails';
+import {getArtist} from '../../actions/artist/getArtist'
+import ArtistDetails from '../../components/artist/ArtistDetails';
 
 const mapStateToProps = (state, ownProps) => {
     return {

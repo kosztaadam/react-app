@@ -1,10 +1,10 @@
 import {connect} from 'react-redux'
-import {getArtist} from '../actions/getArtist'
-import Nav from '../components/Nav'
+import SpotifyAlbumPlayer from '../../components/album/SpotifyAlbumPlayer'
+import {getArtist} from '../../actions/artist/getArtist'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        artistName: state.artistName
+        spotifyAlbumID: state.spotifyAlbumID
     }
 };
 
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const NavContainer = connect(
+const SpotifyAlbumPlayerContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Nav);
+)(SpotifyAlbumPlayer);
 
-export default NavContainer
+export default SpotifyAlbumPlayerContainer

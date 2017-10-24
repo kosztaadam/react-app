@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
-import {getArtist} from '../actions/getArtist'
-import SearchBar from '../components/SearchBar'
+import {getAlbum} from '../../actions/album/getAlbum'
+import SearchBar from '../../components/album/SearchBar'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getArtist: (newartist) => {
-            dispatch(getArtist(newartist));
+        getAlbum: (artist, album) => {
+            dispatch(getAlbum(artist, album));
         }
     }
 };

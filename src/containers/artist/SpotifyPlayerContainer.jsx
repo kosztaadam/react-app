@@ -1,10 +1,10 @@
 import {connect} from 'react-redux'
-import YouTubePlayer from '../components/YouTubePlayer'
-import {getArtist} from '../actions/getArtist'
+import SpotifyPlayer from '../../components/artist/SpotifyPlayer'
+import {getArtist} from '../../actions/artist/getArtist'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        youtubeTrackID: state.youtubeTrackID
+        spotifyTrackID: state.spotifyTrackID
     }
 };
 
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const YouTubePlayerContainer = connect(
+const SpotifyPlayerContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(YouTubePlayer);
+)(SpotifyPlayer);
 
-export default YouTubePlayerContainer
+export default SpotifyPlayerContainer

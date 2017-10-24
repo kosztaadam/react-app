@@ -1,17 +1,19 @@
 import React from 'react';
-import SearchBarContainer from "../containers/SearchBarContainer";
+import SearchBarContainer from "../../containers/album/SearchBarContainer";
 
 class Nav extends React.Component {
 
     render() {
-        const {getArtist} = this.props;
+        const {getAlbum} = this.props;
 
-        let artistName = "";
+        let albumName = "";
         let listItems = "";
-        if (this.props.artistName.length > 0) {
-            artistName = this.props.artistName;
-            listItems = artistName.map((item) =>
-                <li className="searchedArtist" key={item} onClick={e => getArtist(item)}>{item}</li>
+        if (this.props.albumName.length > 0) {
+            //const lastArtistItem = this.props.albumName.length - 1;
+            albumName = this.props.albumName;
+            //console.log(albumName);
+            listItems = albumName.map((item) =>
+                <li className="searchedArtist" key={item.albumName} onClick={e => getAlbum(item.albumName)}>{item.albumName}</li>
             );
         }
 
@@ -33,11 +35,11 @@ class Nav extends React.Component {
 
                         <ul className="navbar-nav mr-auto">
                             <li className="title">Keresési témák</li>
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">Előadók</a>
-                            </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Albumok</a>
+                                <a className="nav-link" href="/eloadok">Előadók</a>
+                            </li>
+                            <li className="nav-item active">
+                                <a className="nav-link" href="/albumok">Albumok</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Számok</a>

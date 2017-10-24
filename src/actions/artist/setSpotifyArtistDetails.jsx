@@ -1,4 +1,4 @@
-import {SET_SPOTIFY_ARTIST_DETAILS} from './consts';
+import {SET_SPOTIFY_ARTIST_DETAILS} from '../consts';
 
 export function setSpotifyArtistDetails(spotifyDetails) {
     var data = JSON.parse(spotifyDetails);

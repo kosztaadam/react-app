@@ -1,10 +1,11 @@
 import {connect} from 'react-redux'
-import SpotifyPlayer from '../components/SpotifyPlayer'
-import {getArtist} from '../actions/getArtist'
+import {getArtist} from '../../actions/artist/getArtist'
+import ArtistGraph from '../../components/artist/ArtistGraph';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        spotifyTrackID: state.spotifyTrackID
+        artistDetails: state.artistDetails,
+        loading: state.loading.loading
     }
 };
 
@@ -16,9 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const SpotifyPlayerContainer = connect(
+const ArtistGraphContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SpotifyPlayer);
+)(ArtistGraph);
 
-export default SpotifyPlayerContainer
+export default ArtistGraphContainer

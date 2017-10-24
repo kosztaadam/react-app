@@ -9,7 +9,7 @@
                 warning.hide();
             }
         });
-
     });
+
 
 })(jQuery);

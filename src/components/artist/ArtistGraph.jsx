@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 class ArtistGraph extends React.Component {
 
-    constructor(props) {
+   /* constructor(props) {
         super(props);
         this.state = {value: ''};
 
@@ -38,10 +38,10 @@ class ArtistGraph extends React.Component {
         // Code to get your data into variable 'defaultTextValue'
         console.log("mount");
         this.setState({textInputValue: 'default'});
-    }
+    }*/
 
     render() {
-        console.log("graph bejott");
+        //console.log("graph bejott");
 
         let similarArtist;
         const artistDetails = this.props.artistDetails;

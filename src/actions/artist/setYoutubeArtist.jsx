@@ -1,4 +1,4 @@
-import {SET_YOUTUBE_ARTIST} from './consts';
+import {SET_YOUTUBE_ARTIST} from '../consts';
 
 export function setYoutubeArtist(trackID) {
     console.log(trackID);

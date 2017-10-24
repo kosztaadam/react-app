@@ -1,11 +1,10 @@
 import {connect} from 'react-redux'
-import {getArtist} from '../actions/getArtist'
-import ArtistGraph from '../components/ArtistGraph';
+import {getArtist} from '../../actions/artist/getArtist'
+import Nav from '../../components/artist/Nav'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        artistDetails: state.artistDetails,
-        loading: state.loading.loading
+        artistName: state.artistName
     }
 };
 
@@ -17,9 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const ArtistGraphContainer = connect(
+const NavContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ArtistGraph);
+)(Nav);
 
-export default ArtistGraphContainer
+export default NavContainer
