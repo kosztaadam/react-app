@@ -10,6 +10,32 @@ class albumDetails extends React.Component {
         return true;
     }
 
+    spotifyTags(genres) {
+
+        const {getAlbum} = this.props;
+
+        if (genres.length > 0) {
+            return (
+                <li>Spotify címkék:
+                    <ul className="tags">
+                        {
+                            genres.map(function (item) {
+                                let i = Math.floor((Math.random() * 4) + 1);
+                                return <li className={"list-item color-" + i} key={item}
+                                           onClick={e => getAlbum(item)}>{item}</li>
+                            })
+                        }
+                        <li>
+                            <div className="clearfix"/>
+                        </li>
+                    </ul>
+                </li>
+            )
+        } else {
+            return;
+        }
+    }
+
     componentDidMount() {
         $(".firstHide").hide();
     }
@@ -44,20 +70,26 @@ class albumDetails extends React.Component {
         let popularityClass = "c100 dark green small";
 
         if (spotifyAlbumDetails !== undefined) {
-            spotifyAlbumDetails = JSON.parse(spotifyAlbumDetails);
-            //popularity
-            popularity = spotifyAlbumDetails.popularity;
-            popularityClass += " p" + spotifyAlbumDetails.popularity;
+            try {
+                spotifyAlbumDetails = JSON.parse(spotifyAlbumDetails);
+                //popularity
+                popularity = spotifyAlbumDetails.popularity;
+                popularityClass += " p" + spotifyAlbumDetails.popularity;
 
-            //followers
-            // followers = spotifyAlbumDetails.followers.total;
+                //followers
+                // followers = spotifyAlbumDetails.followers.total;
 
-            //genres
-            genres = spotifyAlbumDetails.genres;
-            console.log(genres);
+                //genres
+                genres = spotifyAlbumDetails.genres;
+                console.log(genres);
 
-            releaseDate = spotifyAlbumDetails.release_date;
-
+                releaseDate = spotifyAlbumDetails.release_date;
+            }
+            catch (e) {
+                //console.log(e);
+                popularity = "-";
+                releaseDate = "Ismeretlen";
+            }
         }
 
         //Last.fm details
@@ -93,11 +125,11 @@ class albumDetails extends React.Component {
 
         return (
             <div className="row">
-                <div className="col-8">
+                <div className="col-md-8 col-sm-12">
                     <h2 className="mb-3">Album adatok</h2>
                     <h3 className="firstHide">{artistName} - {albumName}</h3>
                 </div>
-                <div className="col-4 popularity">
+                <div className="col-md-4 col-sm-12 popularity">
                     <p className="popularity_text mr-3">Népszerűség: </p>
                     <div className={popularityClass}>
                         <span>{popularity}</span>
@@ -112,10 +144,10 @@ class albumDetails extends React.Component {
                     <hr className="line"/>
                 </div>
 
-                <div className="col-4">
+                <div className="col-md-4 col-sm-12">
                     <img src={albumImage} alt={albumName} width="100%"/>
                 </div>
-                <div className="artistDetails col-8 firstHide">
+                <div className="artistDetails col-md-8 col-sm-12 mt-sm-3 firstHide">
                     <ul>
                         <div className="clearfix"/>
                         <li>Hallgatók száma: {albumListeners}</li>
@@ -138,20 +170,7 @@ class albumDetails extends React.Component {
                                 }
                             </ul>
                         </li>
-                        <li>Spotify címkék:
-                            <ul className="tags">
-                                {
-                                    genres.map(function (item) {
-                                        let i = Math.floor((Math.random() * 4) + 1);
-                                        return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getAlbum(item)}>{item}</li>
-                                    })
-                                }
-                                <li>
-                                    <div className="clearfix"/>
-                                </li>
-                            </ul>
-                        </li>
+                        {this.spotifyTags(genres)}
                         <li>Last.fm címkék:
                             <ul className="tags">
                                 {

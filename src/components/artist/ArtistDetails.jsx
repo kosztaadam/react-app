@@ -88,11 +88,11 @@ class ArtistDetails extends React.Component {
 
         return (
             <div className="row">
-                <div className="col-8">
+                <div className="col-md-8 col-sm-12">
                     <h2 className="mb-3">Előadó adatok</h2>
                     <h3>{artistName}</h3>
                 </div>
-                <div className="col-4 popularity">
+                <div className="col-md-4 col-sm-12 popularity">
                     <p className="popularity_text mr-3">Népszerűség: </p>
                     <div className={popularityClass}>
                         <span>{popularity}</span>
@@ -107,7 +107,7 @@ class ArtistDetails extends React.Component {
                     <hr className="line"/>
                 </div>
 
-                <div className="col-4">
+                <div className="col-md-4 col-sm-12">
                     <div className="row">
                         <div className="col-12">
                             <img src={artistImage} alt={artistName} width="100%"/>
@@ -117,7 +117,7 @@ class ArtistDetails extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="artistDetails col-8 firstHide">
+                <div className="artistDetails col-md-8 col-sm-12 firstHide">
                     <ul>
                         <div className="clearfix"/>
                         <li>Legismertebb album: {topAlbum}</li>
