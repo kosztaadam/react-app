@@ -18,7 +18,8 @@ class Layout extends React.Component {
                 </div>
                 <div className="col-lg-9 col-md-12 mt-2 right_container">
                     <ArtistDetailsContainer artistDetails={this.props.artistDetails}
-                                            spotifyArtistDetails={this.props.spotifyArtistDetails}/>
+                                            spotifyArtistDetails={this.props.spotifyArtistDetails}
+                                            youtubeVideoDetails={this.props.youtubeVideoDetails}/>
                     <ArtistGraphContainer artistDetails={this.props.artistDetails}/>
                     <div className="row">
                         <SpotifyPlayerContainer spotifyTrackID={this.props.spotifyTrackID}/>

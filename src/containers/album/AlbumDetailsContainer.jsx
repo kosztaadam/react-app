@@ -6,7 +6,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         albumDetails: state.albumDetails,
         //loading: state.loading.loading,
-        spotifyAlbumDetails: state.spotifyAlbumDetails.albumDetails
+        spotifyAlbumDetails: state.spotifyAlbumDetails.albumDetails,
+        youtubeVideoDetails: state.youtubeVideoDetails.ytVideoDetails
     }
 };
 

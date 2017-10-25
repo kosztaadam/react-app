@@ -1,22 +1,45 @@
 import React from "react";
-//import $ from 'jquery';
+import $ from 'jquery';
 
 class albumDetails extends React.Component {
 
-    htmlText(wiki) {
-        return {
-            __html: wiki
+    shouldComponentUpdate() {
+        if ($(".firstHide").is(":hidden")) {
+            $(".firstHide").show();
         }
+        return true;
+    }
+
+    componentDidMount() {
+        $(".firstHide").hide();
+    }
+
+    htmlText(wiki) {
+        if (wiki === undefined) {
+            return {
+                __html: "Nem található leírás."
+            }
+        } else {
+            return {
+                __html: wiki
+            }
+        }
+    }
+
+    numberWithCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return parts.join(".");
     }
 
     render() {
         const {getAlbum, albumDetails} = this.props;
-        let {spotifyAlbumDetails} = this.props;
+        let {spotifyAlbumDetails, youtubeVideoDetails} = this.props;
 
         //Spotify details
         //console.log(spotifyAlbumDetails);
 
-        let popularity, followers, releaseDate = "";
+        let popularity, releaseDate = "";
         let genres = [];
         let popularityClass = "c100 dark green small";
 
@@ -43,15 +66,27 @@ class albumDetails extends React.Component {
         let albumTags = [];
 
         if (albumDetails.length > 0) {
-            const lastArtistItem = albumDetails.length - 1;
-            artistName = albumDetails[lastArtistItem].artistName;
-            albumName = albumDetails[lastArtistItem].albumName;
-            albumTracks = JSON.parse(albumDetails[lastArtistItem].albumTracks);
-            albumTags = JSON.parse(albumDetails[lastArtistItem].albumTags);
-            albumImage = albumDetails[lastArtistItem].albumImage;
-            albumListeners = albumDetails[lastArtistItem].albumListeners;
-            albumPlayCount = albumDetails[lastArtistItem].albumPlayCount;
-            wiki = albumDetails[lastArtistItem].wiki;
+            const lastAlbumItem = albumDetails.length - 1;
+            artistName = albumDetails[lastAlbumItem].artistName;
+            albumName = albumDetails[lastAlbumItem].albumName;
+            albumTracks = JSON.parse(albumDetails[lastAlbumItem].albumTracks);
+            albumTags = JSON.parse(albumDetails[lastAlbumItem].albumTags);
+            albumImage = albumDetails[lastAlbumItem].albumImage;
+            albumListeners = this.numberWithCommas(albumDetails[lastAlbumItem].albumListeners);
+            albumPlayCount = this.numberWithCommas(albumDetails[lastAlbumItem].albumPlayCount);
+            wiki = albumDetails[lastAlbumItem].wiki;
+        }
+
+        //Youtube details
+        let ytViewCount, likeCount, dislikeCount = "";
+        let ytArtistTags = [];
+
+        if (youtubeVideoDetails !== undefined) {
+            ytViewCount = this.numberWithCommas(youtubeVideoDetails.statistics.viewCount);
+            likeCount = this.numberWithCommas(youtubeVideoDetails.statistics.likeCount);
+            dislikeCount = this.numberWithCommas(youtubeVideoDetails.statistics.dislikeCount);
+            ytArtistTags = youtubeVideoDetails.tags;
+            ytArtistTags = ytArtistTags.slice(0, 10);
         }
 
         console.log("frissul a details");
@@ -60,7 +95,7 @@ class albumDetails extends React.Component {
             <div className="row">
                 <div className="col-8">
                     <h2 className="mb-3">Album adatok</h2>
-                    <h3>{artistName} - {albumName}</h3>
+                    <h3 className="firstHide">{artistName} - {albumName}</h3>
                 </div>
                 <div className="col-4 popularity">
                     <p className="popularity_text mr-3">Népszerűség: </p>
@@ -80,12 +115,14 @@ class albumDetails extends React.Component {
                 <div className="col-4">
                     <img src={albumImage} alt={albumName} width="100%"/>
                 </div>
-                <div className="artistDetails col-8">
+                <div className="artistDetails col-8 firstHide">
                     <ul>
                         <div className="clearfix"/>
                         <li>Hallgatók száma: {albumListeners}</li>
                         <li>Lejátszások száma: {albumPlayCount}</li>
                         <li>Kiadás dátuma: {releaseDate}</li>
+                        <li>Youtube videó megtekintések száma: {ytViewCount}</li>
+                        <li>Youtube videó like/dislike: {likeCount}/{dislikeCount}</li>
                         <li>Számok:
                             <ul>
                                 {
@@ -95,7 +132,8 @@ class albumDetails extends React.Component {
                                         var seconds = item.duration - minutes * 60;
 
                                         return <li className={"list-item color-" + i} key={item.name}
-                                                   onClick={e => getAlbum(item.name)}>{item.name} - {minutes}:{seconds}</li>
+                                                   onClick={e => getAlbum(item.name)}>{item.name} {" "}
+                                            - {minutes}:{seconds}</li>
                                     })
                                 }
                             </ul>
@@ -121,6 +159,20 @@ class albumDetails extends React.Component {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item.name}
                                                    onClick={e => getAlbum(item.name)}>{item.name}</li>
+                                    })
+                                }
+                                <li>
+                                    <div className="clearfix"/>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Youtube címkék:
+                            <ul className="tags">
+                                {
+                                    ytArtistTags.map(function (item) {
+                                        let i = Math.floor((Math.random() * 4) + 1);
+                                        return <li className={"list-item color-" + i} key={item}
+                                                   onClick={e => getAlbum(item)}>{item}</li>
                                     })
                                 }
                                 <li>

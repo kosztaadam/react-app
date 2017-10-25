@@ -8,7 +8,7 @@ import {
     SET_SPOTIFY_ARTIST_DETAILS,
     SET_YOUTUBE_ARTIST,
     SET_ALBUM,
-    SET_ALBUM_DETAILS, SET_SPOTIFY_ALBUM_DETAILS, SET_SPOTIFY_ALBUM
+    SET_ALBUM_DETAILS, SET_SPOTIFY_ALBUM_DETAILS, SET_SPOTIFY_ALBUM, SET_YOUTUBE_VIDEO_DETAILS
 } from '../actions/consts';
 
 const initialState = [];
@@ -117,7 +117,7 @@ function spotifyAlbumReducer(state = initialState, action) {
 }
 
 
-function youtubeTrackIDReducer(state = initialState, action) {
+function youtubeReducer(state = initialState, action) {
     switch (action.type) {
         case SET_YOUTUBE_ARTIST: {
             //console.log("spotifyArtistIDReducer");
@@ -125,6 +125,14 @@ function youtubeTrackIDReducer(state = initialState, action) {
             const newState = Object.assign([], state);
             //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
             newState.push(action.trackID);
+            return newState;
+        }
+        case SET_YOUTUBE_VIDEO_DETAILS: {
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
+            newState.ytVideoDetails = action.youtubeVideoDetails;
             return newState;
         }
         default:
@@ -146,7 +154,8 @@ function artistReducer(state = initialState, action) {
                 'artistPlayCount': action.artistPlayCount,
                 'artistTags': action.artistTags,
                 'deep': action.deep,
-                'limit': action.limit
+                'limit': action.limit,
+                'wiki': action.wiki
             });
             return newState;
         }
@@ -201,7 +210,8 @@ const artistApp = combineReducers({
     artistDetails: artistReducer,
     spotifyArtistDetails: spotifyReducer,
     spotifyTrackID: spotifyReducer,
-    youtubeTrackID: youtubeTrackIDReducer,
+    youtubeTrackID: youtubeReducer,
+    youtubeVideoDetails: youtubeReducer,
 
     albumName: albumNameReducer,
     albumDetails: albumReducer,

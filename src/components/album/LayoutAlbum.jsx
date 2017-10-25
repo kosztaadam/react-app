@@ -17,7 +17,8 @@ class LayoutAlbum extends React.Component {
                 </div>
                 <div className="col-lg-9 col-md-12 mt-2 right_container">
                     <AlbumDetailsContainer artistDetails={this.props.albumDetails}
-                                           spotifyAlbumDetails={this.props.spotifyAlbumDetails}/>
+                                           spotifyAlbumDetails={this.props.spotifyAlbumDetails}
+                                           youtubeVideoDetails={this.props.youtubeVideoDetails}/>
                     <div className="row">
                         <SpotifyAlbumPlayerContainer spotifyAlbumID={this.props.spotifyAlbumID}/>
                         <YouTubePlayerContainer youtubeTrackID={this.props.youtubeTrackID}/>

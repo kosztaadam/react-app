@@ -1,19 +1,39 @@
 import React from "react";
-//import $ from 'jquery';
+import $ from 'jquery';
 
 class ArtistDetails extends React.Component {
 
-    /*shouldComponentUpdate() {
-     console.log("shouldComponentupdate " + this.props.loading);
+    shouldComponentUpdate() {
+        if ($(".firstHide").is(":hidden")) {
+            $(".firstHide").show();
+        }
+        return true;
+    }
 
-     if (this.props.loading || this.props.loading === undefined) {
-     return false;
-     }
-     return true;
-     }*/
+    componentDidMount() {
+        $(".firstHide").hide();
+    }
+
+    numberWithCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return parts.join(".");
+    }
+
+    htmlText(wiki) {
+        if (wiki === undefined) {
+            return {
+                __html: "Nem található leírás."
+            }
+        } else {
+            return {
+                __html: wiki
+            }
+        }
+    }
 
     render() {
-        const {getArtist, artistDetails, spotifyArtistDetails} = this.props;
+        const {getArtist, artistDetails, spotifyArtistDetails, youtubeVideoDetails} = this.props;
 
         //Spotify details
 
@@ -27,7 +47,7 @@ class ArtistDetails extends React.Component {
             popularityClass += " p" + spotifyArtistDetails.popularity;
 
             //followers
-            followers = spotifyArtistDetails.followers.total;
+            followers = this.numberWithCommas(spotifyArtistDetails.followers.total);
 
             //genres
             genres = spotifyArtistDetails.genres;
@@ -36,22 +56,33 @@ class ArtistDetails extends React.Component {
 
 
         //Last.fm details
-        let artistName, topAlbum, artistImage, artistListeners, artistPlayCount = "";
+        let artistName, topAlbum, artistImage, artistListeners, artistPlayCount, wiki = "";
         let similarArtist = [];
         let artistTags = [];
 
         if (artistDetails.length > 0) {
-            const lastArtistItem = artistDetails.length - 1;
+            let lastArtistItem = artistDetails.length - 1;
             artistName = artistDetails[lastArtistItem].artistName;
             topAlbum = artistDetails[lastArtistItem].topAlbum;
             similarArtist = JSON.parse(artistDetails[lastArtistItem].similarArtist).nodes;
             artistTags = JSON.parse(artistDetails[lastArtistItem].artistTags);
             artistImage = artistDetails[lastArtistItem].artistImage;
-            artistListeners = artistDetails[lastArtistItem].artistListeners;
-            artistPlayCount = artistDetails[lastArtistItem].artistPlayCount;
+            artistListeners = this.numberWithCommas(artistDetails[lastArtistItem].artistListeners);
+            artistPlayCount = this.numberWithCommas(artistDetails[lastArtistItem].artistPlayCount);
+            wiki = artistDetails[lastArtistItem].wiki;
         }
 
-        //console.log(artistTags);
+        //Youtube details
+        let ytViewCount, likeCount, dislikeCount = "";
+        let ytArtistTags = [];
+
+        if (youtubeVideoDetails !== undefined) {
+            ytViewCount = this.numberWithCommas(youtubeVideoDetails.statistics.viewCount);
+            likeCount = this.numberWithCommas(youtubeVideoDetails.statistics.likeCount);
+            dislikeCount = this.numberWithCommas(youtubeVideoDetails.statistics.dislikeCount);
+            ytArtistTags = youtubeVideoDetails.tags;
+            ytArtistTags = ytArtistTags.slice(0, 10);
+        }
 
         console.log("frissul a details");
 
@@ -72,20 +103,29 @@ class ArtistDetails extends React.Component {
                     </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 firstHide">
                     <hr className="line"/>
                 </div>
 
                 <div className="col-4">
-                    <img src={artistImage} alt={artistName} width="100%"/>
+                    <div className="row">
+                        <div className="col-12">
+                            <img src={artistImage} alt={artistName} width="100%"/>
+                        </div>
+                        <div className="col-12 mt-2">
+                            <span dangerouslySetInnerHTML={ this.htmlText(wiki) }/>
+                        </div>
+                    </div>
                 </div>
-                <div className="artistDetails col-8">
+                <div className="artistDetails col-8 firstHide">
                     <ul>
                         <div className="clearfix"/>
                         <li>Legismertebb album: {topAlbum}</li>
                         <li>Hallgatók száma: {artistListeners}</li>
                         <li>Lejátszások száma: {artistPlayCount}</li>
                         <li>Spotify követők száma: {followers}</li>
+                        <li>Youtube videó megtekintések száma: {ytViewCount}</li>
+                        <li>Youtube videó like/dislike: {likeCount}/{dislikeCount}</li>
                         <li>Hasonló előadók:
                             <ul className="similar_artist">
                                 {
@@ -96,6 +136,20 @@ class ArtistDetails extends React.Component {
                                         return <li key={item.id} onClick={e => getArtist(item.id)}>{item.id}</li>
                                     })
                                 }
+                            </ul>
+                        </li>
+                        <li>Last.fm címkék:
+                            <ul className="tags">
+                                {
+                                    artistTags.map(function (item) {
+                                        let i = Math.floor((Math.random() * 4) + 1);
+                                        return <li className={"list-item color-" + i} key={item.name}
+                                                   onClick={e => getArtist(item.name)}>{item.name}</li>
+                                    })
+                                }
+                                <li>
+                                    <div className="clearfix"/>
+                                </li>
                             </ul>
                         </li>
                         <li>Spotify címkék:
@@ -112,13 +166,13 @@ class ArtistDetails extends React.Component {
                                 </li>
                             </ul>
                         </li>
-                        <li>Last.fm címkék:
+                        <li>Youtube címkék:
                             <ul className="tags">
                                 {
-                                    artistTags.map(function (item) {
+                                    ytArtistTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
-                                        return <li className={"list-item color-" + i} key={item.name}
-                                                   onClick={e => getArtist(item.name)}>{item.name}</li>
+                                        return <li className={"list-item color-" + i} key={item}
+                                                   onClick={e => getArtist(item)}>{item}</li>
                                     })
                                 }
                                 <li>

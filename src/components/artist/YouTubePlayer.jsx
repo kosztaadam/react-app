@@ -5,7 +5,7 @@ class YoutTubePlayer extends React.Component {
 
     iframe() {
         let youtubeID = "";
-        console.log("yt iframe");
+        //console.log("yt iframe");
         let itemNumber = this.props.youtubeTrackID.length;
 
         console.log(itemNumber);
@@ -13,10 +13,14 @@ class YoutTubePlayer extends React.Component {
             youtubeID = this.props.youtubeTrackID[itemNumber - 1];
         }
 
-        console.log(youtubeID);
-
-        return {
-            __html: '<iframe width="90%" height="460" src="https://www.youtube.com/embed/' + youtubeID + '"></iframe>'
+        if (youtubeID === "") {
+            return {
+                __html: ""
+            }
+        } else {
+            return {
+                __html: '<iframe width="90%" height="460" src="https://www.youtube.com/embed/' + youtubeID + '"></iframe>'
+            }
         }
     }
 

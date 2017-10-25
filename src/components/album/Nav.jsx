@@ -25,7 +25,7 @@ class Nav extends React.Component {
                         <span className="navbar-toggler-icon navbar_icon"/>
                     </button>
 
-                    <a className="navbar-brand" href="#"><i className="fa fa-music" aria-hidden="true"/>
+                    <a className="navbar-brand" href="/"><i className="fa fa-music" aria-hidden="true"/>
                         <span className="title">Zenei adatbázis</span>
                     </a>
 
@@ -35,7 +35,7 @@ class Nav extends React.Component {
 
                         <hr className="line"/>
 
-                        <ul className="navbar-nav mr-auto">
+                        <ul className="navbar-nav mr-auto menu">
                             <li className="title">Keresési témák</li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/eloadok">Előadók</a>

@@ -13,6 +13,7 @@ export function setArtistDetails(data) {
         artistListeners: artist.artistListeners,
         artistTags: artist.artistTags,
         limit: artist.limit,
-        deep: artist.deep
+        deep: artist.deep,
+        wiki: artist.wiki
     }
 }

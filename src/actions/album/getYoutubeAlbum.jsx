@@ -1,4 +1,5 @@
 import {setYoutubeArtist} from "../artist/setYoutubeArtist";
+import {setYoutubeVideoDetails} from "../artist/setYoutubeVideoDetails";
 
 function fetchArtist(artistName, albumName) {
     let url = "";
@@ -21,7 +22,8 @@ export function getYoutubeAlbum(artistName, albumName) {
     return dispatch => {
         return fetchArtist(artistName, albumName)
             .then(data => {
-                dispatch(setYoutubeArtist(data))
+                dispatch(setYoutubeArtist(data));
+                dispatch(setYoutubeVideoDetails(data));
             })
             .catch(error => {
                 throw error;
