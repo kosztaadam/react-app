@@ -1,12 +1,12 @@
 import {setYoutubeArtist} from "../artist/setYoutubeArtist";
 import {setYoutubeVideoDetails} from "../artist/setYoutubeVideoDetails";
 
-function fetchArtist(artistName, trackName) {
+function fetchTrack(artistName, trackName) {
     let url = "";
-    if (artistName !== undefined) {
-        url = "http://localhost:5000/youtube/track/" + artistName + " " + trackName;
+    if (artistName !== "") {
+        url = "http://localhost:5000/youtube/track/" + artistName + "/" + trackName;
     } else {
-        url = "http://localhost:5000/youtube/" + trackName;
+        url = "http://localhost:5000/youtube/track/" + trackName;
     }
 
     return fetch(url)
@@ -18,9 +18,9 @@ function fetchArtist(artistName, trackName) {
         });
 }
 
-export function getYoutubeAlbum(artistName, trackName) {
+export function getYoutubeTrack(artistName, trackName) {
     return dispatch => {
-        return fetchArtist(artistName, trackName)
+        return fetchTrack(artistName, trackName)
             .then(data => {
                 dispatch(setYoutubeArtist(data));
                 dispatch(setYoutubeVideoDetails(data));

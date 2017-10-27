@@ -1,19 +1,17 @@
 import React from 'react';
-import SearchBarContainer from "../../containers/album/SearchBarContainer";
+import SearchBarContainer from "../../containers/track/SearchBarContainer";
 
 class Nav extends React.Component {
 
     render() {
-        const {getAlbum} = this.props;
+        const {getArtist} = this.props;
 
-        let albumName = "";
+        let artistName = "";
         let listItems = "";
-        if (this.props.albumName.length > 0) {
-            //const lastArtistItem = this.props.albumName.length - 1;
-            albumName = this.props.albumName;
-            //console.log(albumName);
-            listItems = albumName.map((item) =>
-                <li className="searchedArtist" key={item.albumName} onClick={e => getAlbum(item.albumName)}>{item.albumName}</li>
+        if (this.props.artistName.length > 0) {
+            artistName = this.props.artistName;
+            listItems = artistName.map((item) =>
+                <li className="searchedArtist" key={item} onClick={e => getArtist(item)}>{item}</li>
             );
         }
 
@@ -33,18 +31,32 @@ class Nav extends React.Component {
 
                         <SearchBarContainer artistName={this.props.artistName}/>
 
-                        <hr className="line"/>
-
-                        <ul className="navbar-nav mr-auto menu">
+                        <ul className="navbar-nav menu mr-auto">
                             <li className="title">Keresési témák</li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/eloadok">Előadók</a>
                             </li>
-                            <li className="nav-item active">
+                            <li className="nav-item">
                                 <a className="nav-link" href="/albumok">Albumok</a>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/szamo">Számok</a>
+                            <li className="nav-item active">
+                                <a className="nav-link" href="/szamok">Számok</a>
+                            </li>
+                        </ul>
+
+                        <hr className="line"/>
+
+                        <ul className="navbar-nav mr-auto">
+                            <li className="title">Gráf beállítások</li>
+                            <li className="form-group">
+                                <label htmlFor="fisheye">Halszem effekt</label>
+                                <input type="checkbox" id="fisheye" data-toggle="toggle" data-on="Bekapcsolva"
+                                       data-off="Kikapcsolva" data-onstyle="success" data-offstyle="off"/>
+                            </li>
+                            <li className="form-group">
+                                <label htmlFor="highlight">Pontok kiemelése</label>
+                                <input type="checkbox" id="highlight" data-toggle="toggle" data-on="Bekapcsolva"
+                                       data-off="Kikapcsolva" data-onstyle="success" data-offstyle="off"/>
                             </li>
                         </ul>
 

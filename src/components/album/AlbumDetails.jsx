@@ -147,7 +147,7 @@ class albumDetails extends React.Component {
                 <div className="col-md-4 col-sm-12">
                     <img src={albumImage} alt={albumName} width="100%"/>
                 </div>
-                <div className="artistDetails col-md-8 col-sm-12 mt-sm-3 firstHide">
+                <div className="artistDetails col-md-8 col-sm-12 firstHide">
                     <ul>
                         <div className="clearfix"/>
                         <li>Hallgatók száma: {albumListeners}</li>

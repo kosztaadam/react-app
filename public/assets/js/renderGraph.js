@@ -1,6 +1,6 @@
 var graph = undefined;
 
-function renderGraph(simart, fisheyeEnable, highlightEnable) {
+function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
 
     console.log("lefut");
 
@@ -103,22 +103,41 @@ function renderGraph(simart, fisheyeEnable, highlightEnable) {
                 return color(d.group);
             });
 
-        node.append("title")
-            .text(function (d) {
-                return d.id;
-            });
+        if(trackGraph) {
+            node.append("title")
+                .text(function (d) {
+                    return d.artist + " - " + d.id;
+                });
 
-        node.append("text")
-            .attr("dx", function (d) {
-                if (d.id.length < 5)
-                    return d.id.length * 3;
-                else
-                    return 10;
-            })
-            .attr("dy", ".35em")
-            .text(function (d) {
-                return d.id
-            });
+            node.append("text")
+                .attr("dx", function (d) {
+                    if (d.id.length < 5)
+                        return d.id.length * 3;
+                    else
+                        return 10;
+                })
+                .attr("dy", ".35em")
+                .text(function (d) {
+                    return d.artist + " - " + d.id;
+                });
+        } else {
+            node.append("title")
+                .text(function (d) {
+                    return d.id;
+                });
+
+            node.append("text")
+                .attr("dx", function (d) {
+                    if (d.id.length < 5)
+                        return d.id.length * 3;
+                    else
+                        return 10;
+                })
+                .attr("dy", ".35em")
+                .text(function (d) {
+                    return d.id
+                });
+        }
 
         function ticked() {
             link

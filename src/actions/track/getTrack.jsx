@@ -1,7 +1,12 @@
 import {loadingData, loadingDataSuccess} from "../loading"
+import {setTrack} from "./setTrack";
+import {getSpotifyTrack} from "./getSpotifyTrack";
+import {getYoutubeTrack} from "./getYoutubeTrack";
+import {setTrackDetails} from "./setTrackDetails";
+
 
 function fetchTrack(artistName, trackName, similarTrackNumber, depthNumber) {
-    const url = "http://localhost:5000/json/track/" + artistName + "/" + similarTrackNumber + "/" + depthNumber;
+    //const url = "http://localhost:5000/json/track/" + artistName + "/" + similarTrackNumber + "/" + depthNumber;
 
     let url = "";
     if (artistName === "") {
@@ -20,7 +25,7 @@ function fetchTrack(artistName, trackName, similarTrackNumber, depthNumber) {
         });
 }
 
-export function getArtist(artistName, trackName, similarTrackNumber, depthNumber) {
+export function getTrack(artistName, trackName, similarTrackNumber, depthNumber) {
     return dispatch => {
         dispatch(loadingData());
         dispatch(setTrack(artistName, trackName));

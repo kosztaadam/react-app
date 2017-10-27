@@ -40,7 +40,7 @@ class Nav extends React.Component {
                                 <a className="nav-link" href="/albumok">Albumok</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Számok</a>
+                                <a className="nav-link" href="/szamok">Számok</a>
                             </li>
                         </ul>
 

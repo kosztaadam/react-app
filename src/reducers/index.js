@@ -8,7 +8,8 @@ import {
     SET_SPOTIFY_ARTIST_DETAILS,
     SET_YOUTUBE_ARTIST,
     SET_ALBUM,
-    SET_ALBUM_DETAILS, SET_SPOTIFY_ALBUM_DETAILS, SET_SPOTIFY_ALBUM, SET_YOUTUBE_VIDEO_DETAILS
+    SET_ALBUM_DETAILS, SET_SPOTIFY_ALBUM_DETAILS, SET_SPOTIFY_ALBUM, SET_YOUTUBE_VIDEO_DETAILS, SET_TRACK_DETAILS,
+    SET_TRACK
 } from '../actions/consts';
 
 const initialState = [];
@@ -116,7 +117,6 @@ function spotifyAlbumReducer(state = initialState, action) {
     }
 }
 
-
 function youtubeReducer(state = initialState, action) {
     switch (action.type) {
         case SET_YOUTUBE_ARTIST: {
@@ -205,6 +205,50 @@ function albumReducer(state = initialState, action) {
     }
 }
 
+
+function trackReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_TRACK_DETAILS: {
+            //alert(action.artistTags);
+            const newState = Object.assign([], state);
+            newState.push({
+                'artistName': action.artistName,
+                'trackName': action.trackName,
+                'albumName': action.albumName,
+                'albumImage': action.albumImage,
+                'trackPlayCount': action.playCount,
+                'trackListeners': action.listeners,
+                'wiki': action.wiki,
+                'trackTags': action.trackTags,
+                'similarTrack': action.similarTrack,
+                'deep': action.deep,
+                'limit': action.limit,
+                'duration': action.duration
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
+function trackNameReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_TRACK: {
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.albumName) === -1 ? newState.push(action.albumName) : console.log("This item already exists");
+            newState.push({
+                'artistName': action.artistName,
+                'trackName': action.trackName
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
+
 const artistApp = combineReducers({
     artistName: artistNameReducer,
     artistDetails: artistReducer,
@@ -217,6 +261,9 @@ const artistApp = combineReducers({
     albumDetails: albumReducer,
     spotifyAlbumDetails: spotifyAlbumReducer,
     spotifyAlbumID: spotifyAlbumReducer,
+
+    trackName: trackNameReducer,
+    trackDetails: trackReducer,
 
     loading: loadingReducer
 });

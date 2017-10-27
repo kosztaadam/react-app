@@ -1,13 +1,13 @@
-
+import {setSpotifyTrack} from "../artist/setSpotifyTrack";
+import {setSpotifyTrackDetails} from "./setSpotifyTrackDetails";
 
 function fetchTrack(artistName, trackName) {
-
     let url = "";
     if (artistName === "") {
-        url = "http://localhost:5000/spotify/album/" + trackName;
+        url = "http://localhost:5000/spotify/track/" + trackName;
     }
     else {
-        url = "http://localhost:5000/spotify/album/" + artistName + "/" + trackName;
+        url = "http://localhost:5000/spotify/track/" + artistName + "/" + trackName;
     }
 
     return fetch(url)

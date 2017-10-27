@@ -3,8 +3,8 @@ import {setYoutubeVideoDetails} from "../artist/setYoutubeVideoDetails";
 
 function fetchAlbum(artistName, albumName) {
     let url = "";
-    if (artistName !== undefined) {
-        url = "http://localhost:5000/youtube/album/" + artistName + " " + albumName;
+    if (artistName !== "") {
+        url = "http://localhost:5000/youtube/album/" + artistName + "/" + albumName;
     } else {
         url = "http://localhost:5000/youtube/album/" + albumName;
     }
