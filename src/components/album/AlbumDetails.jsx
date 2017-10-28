@@ -59,7 +59,7 @@ class albumDetails extends React.Component {
     }
 
     render() {
-        const {getAlbum, albumDetails} = this.props;
+        const {getTag, getTrack, albumDetails} = this.props;
         let {spotifyAlbumDetails, youtubeVideoDetails} = this.props;
 
         //Spotify details
@@ -164,7 +164,7 @@ class albumDetails extends React.Component {
                                         var seconds = item.duration - minutes * 60;
 
                                         return <li className={"list-item color-" + i} key={item.name}
-                                                   onClick={e => getAlbum(item.name)}>{item.name} {" "}
+                                                   onClick={e => getTrack(artistName, item.name)}>{item.name} {" "}
                                             - {minutes}:{seconds}</li>
                                     })
                                 }
@@ -177,7 +177,7 @@ class albumDetails extends React.Component {
                                     albumTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item.name}
-                                                   onClick={e => getAlbum(item.name)}>{item.name}</li>
+                                                   onClick={e => getTag(item.name)}>{item.name}</li>
                                     })
                                 }
                                 <li>
@@ -191,7 +191,7 @@ class albumDetails extends React.Component {
                                     ytArtistTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getAlbum(item)}>{item}</li>
+                                                   onClick={e => getTag(item)}>{item}</li>
                                     })
                                 }
                                 <li>

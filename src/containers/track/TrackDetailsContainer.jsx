@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {getArtist} from '../../actions/artist/getArtist'
+import {getTrack} from '../../actions/track/getTrack'
 import TrackDetails from '../../components/track/TrackDetails';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,8 +13,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getArtist: (newartist) => {
-            dispatch(getArtist(newartist));
+        getTrack: (artist, track) => {
+            dispatch(getTrack(artist, track));
+        },
+        getTag: (tag) => {
+            window.location.href = "/cimkek?tag=" + tag;
         }
     }
 };

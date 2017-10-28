@@ -3,6 +3,26 @@ import SearchBarContainer from "../../containers/album/SearchBarContainer";
 
 class Nav extends React.Component {
 
+    getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    componentDidMount() {
+        let artist = this.getParameterByName('artist');
+        let album = this.getParameterByName('album');
+        if(artist !== null) {
+            this.props.getAlbum(artist, album);
+        } else if(album !== null) {
+            this.props.getAlbum(album);
+        }
+    }
+
     render() {
         const {getAlbum} = this.props;
 
@@ -45,6 +65,9 @@ class Nav extends React.Component {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/szamo">Számok</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/cimkek">Címkék</a>
                             </li>
                         </ul>
 

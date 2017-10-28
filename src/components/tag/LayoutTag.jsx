@@ -1,30 +1,27 @@
 import React from 'react';
 import Footer from '../Footer';
-import NavContainer from "../../containers/track/NavContainer"
-import TrackDetailsContainer from "../../containers/track/TrackDetailsContainer";
-import TrackGraphContainer from "../../containers/track/TrackGraphContainer";
-import SpotifyPlayerContainer from "../../containers/track/SpotifyPlayerContainer";
+import NavContainer from "../../containers/tag/NavContainer"
+import TagDetailsContainer from "../../containers/tag/TagDetailsContainer";
+import TagGraphContainer from "../../containers/tag/TagGraphContainer";
+import SpotifyPlayerContainer from "../../containers/tag/SpotifyPlayerContainer";
 import YouTubePlayerContainer from "../../containers/artist/YouTubePlayerContainer";
 import LoadingContainer from "../../containers/artist/LoadingContainer";
 
-class LayoutTrack extends React.Component {
-
-
+class Layout extends React.Component {
 
     render() {
 
         return (
             <div className="row">
                 <div className="col-lg-3 col-md-12">
-                    <NavContainer artistName={this.props.artistName}/>
+                    <NavContainer tagName={this.props.tagName}/>
                 </div>
                 <div className="col-lg-9 col-md-12 mt-2 right_container">
-                    <TrackDetailsContainer trackDetails={this.props.trackDetails}
-                                           spotifytrackDetails={this.props.spotifytrackDetails}
-                                           youtubeVideoDetails={this.props.youtubeVideoDetails}/>
-                    <TrackGraphContainer trackDetails={this.props.trackDetails}/>
+                    <TagDetailsContainer tagDetails={this.props.tagDetails}
+                                         spotifyTagDetails={this.props.spotifyTagDetails}/>
+                    <TagGraphContainer tagDetails={this.props.tagDetails}/>
                     <div className="row">
-                        <SpotifyPlayerContainer spotifyTrackID={this.props.spotifyTrackID}/>
+                        <SpotifyPlayerContainer spotifyTagDetails={this.props.spotifyTagDetails}/>
                         <YouTubePlayerContainer youtubeTrackID={this.props.youtubeTrackID}/>
                     </div>
                 </div>
@@ -39,4 +36,4 @@ class LayoutTrack extends React.Component {
     }
 }
 
-export default LayoutTrack;
+export default Layout;

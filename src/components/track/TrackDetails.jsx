@@ -33,7 +33,7 @@ class TrackDetails extends React.Component {
     }
 
     render() {
-        const {getArtist, trackDetails, spotifytrackDetails, youtubeVideoDetails} = this.props;
+        const {getTag, getTrack, trackDetails, spotifytrackDetails, youtubeVideoDetails} = this.props;
 
         //Spotify details
 
@@ -132,7 +132,7 @@ class TrackDetails extends React.Component {
                                         if (item.group !== 1) {
                                             return;
                                         }
-                                        return <li key={item.id} onClick={e => getArtist(item.id)}>{item.artist} {" "}
+                                        return <li key={item.id} onClick={e => getTrack(item.artist, item.id)}>{item.artist} {" "}
                                             - {item.id}</li>
                                     })
                                 }
@@ -144,7 +144,7 @@ class TrackDetails extends React.Component {
                                     trackTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item.name}
-                                                   onClick={e => getArtist(item.name)}>{item.name}</li>
+                                                   onClick={e => getTag(item.name)}>{item.name}</li>
                                     })
                                 }
                                 <li>
@@ -158,7 +158,7 @@ class TrackDetails extends React.Component {
                                     ytArtistTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getArtist(item)}>{item}</li>
+                                                   onClick={e => getTag(item)}>{item}</li>
                                     })
                                 }
                                 <li>

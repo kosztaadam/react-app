@@ -9,7 +9,7 @@ import {
     SET_YOUTUBE_ARTIST,
     SET_ALBUM,
     SET_ALBUM_DETAILS, SET_SPOTIFY_ALBUM_DETAILS, SET_SPOTIFY_ALBUM, SET_YOUTUBE_VIDEO_DETAILS, SET_TRACK_DETAILS,
-    SET_TRACK
+    SET_TRACK, SET_TAG, SET_TAG_DETAILS, SET_SPOTIFY_TAG_DETAILS
 } from '../actions/consts';
 
 const initialState = [];
@@ -56,6 +56,21 @@ function albumNameReducer(state = initialState, action) {
             newState.push({
                 'artistName': action.artistName,
                 'albumName': action.albumName
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
+function tagNameReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_TAG: {
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.albumName) === -1 ? newState.push(action.albumName) : console.log("This item already exists");
+            newState.push({
+                'tagName': action.tagName
             });
             return newState;
         }
@@ -248,6 +263,45 @@ function trackNameReducer(state = initialState, action) {
     }
 }
 
+function tagReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_TAG_DETAILS: {
+            //alert(action.artistTags);
+            const newState = Object.assign([], state);
+            newState.push({
+                'tagName': action.tagName,
+                'similarTag': action.similarTag,
+                'total': action.total,
+                'reach': action.reach,
+                'deep': action.deep,
+                'limit': action.limit,
+                'wiki': action.wiki,
+                'topTagTracks' : action.topTagTracks
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
+function spotifyTagReducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_SPOTIFY_TAG_DETAILS: {
+            //console.log("spotifyArtistIDReducer");
+            // console.log(action.trackID);
+            const newState = Object.assign([], state);
+            //newState.indexOf(action.trackID) === -1 ? newState.push(action.trackID) : console.log("This item already exists");
+            newState.push({
+                'topGenreTracks': action.topGenreTracks
+            });
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
 
 const artistApp = combineReducers({
     artistName: artistNameReducer,
@@ -264,6 +318,10 @@ const artistApp = combineReducers({
 
     trackName: trackNameReducer,
     trackDetails: trackReducer,
+
+    tagDetails: tagReducer,
+    tagName: tagNameReducer,
+    spotifyTagDetails: spotifyTagReducer,
 
     loading: loadingReducer
 });

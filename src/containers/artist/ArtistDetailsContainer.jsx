@@ -15,6 +15,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getArtist: (newartist) => {
             dispatch(getArtist(newartist));
+        },
+        getTag: (tag) => {
+            window.location.href = "/cimkek?tag=" + tag;
+        },
+        getAlbum: (artist, album) => {
+            window.location.href = "/albumok?artist=" + artist + "&album=" + album;
         }
     }
 };

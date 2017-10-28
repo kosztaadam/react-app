@@ -42,6 +42,9 @@ class Nav extends React.Component {
                             <li className="nav-item">
                                 <a className="nav-link" href="/szamok">Számok</a>
                             </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/cimkek">Címkék</a>
+                            </li>
                         </ul>
 
                         <hr className="line"/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBarContainer from "../../containers/track/SearchBarContainer";
+import SearchBarContainer from "../../containers/tag/SearchBarContainer";
 
 class Nav extends React.Component {
 
@@ -14,24 +14,22 @@ class Nav extends React.Component {
     }
 
     componentDidMount() {
-        let artist = this.getParameterByName('artist');
-        let track = this.getParameterByName('track');
-        if(artist !== null) {
-            this.props.getTrack(artist, track, 3, 3);
-        } else if(track !== null) {
-            this.props.getTrack(track, 3, 3);
+        let tag = this.getParameterByName('tag');
+        if (tag !== null) {
+            this.props.getTag(tag, 3, 3);
         }
     }
 
     render() {
-        const {getArtist} = this.props;
+        const {getTag} = this.props;
 
-        let artistName = "";
+        let tagName = "";
         let listItems = "";
-        if (this.props.artistName.length > 0) {
-            artistName = this.props.artistName;
-            listItems = artistName.map((item) =>
-                <li className="searchedArtist" key={item} onClick={e => getArtist(item)}>{item}</li>
+        if (this.props.tagName.length > 0) {
+            tagName = this.props.tagName;
+            listItems = tagName.map((item) =>
+                <li className="searchedArtist" key={item.tagName}
+                    onClick={e => getTag(item.tagName)}>{item.tagName}</li>
             );
         }
 
@@ -49,7 +47,7 @@ class Nav extends React.Component {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-                        <SearchBarContainer artistName={this.props.artistName}/>
+                        <SearchBarContainer artistName={this.props.tagName}/>
 
                         <ul className="navbar-nav menu mr-auto">
                             <li className="title">Keresési témák</li>
@@ -59,10 +57,10 @@ class Nav extends React.Component {
                             <li className="nav-item">
                                 <a className="nav-link" href="/albumok">Albumok</a>
                             </li>
-                            <li className="nav-item active">
+                            <li className="nav-item">
                                 <a className="nav-link" href="/szamok">Számok</a>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item active">
                                 <a className="nav-link" href="/cimkek">Címkék</a>
                             </li>
                         </ul>

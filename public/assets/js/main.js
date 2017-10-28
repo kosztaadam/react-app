@@ -9,7 +9,25 @@
                 warning.hide();
             }
         });
-    });
 
+        $('#fisheye').change(function () {
+            if ($(this).prop('checked')) {
+                $('#highlight').bootstrapToggle('off')
+                renderGraph(undefined, true, false, false);
+            }
+            else {
+                renderGraph(undefined, false, false, false);
+            }
+        });
+
+        $('#highlight').change(function () {
+            if ($(this).prop('checked')) {
+                $('#fisheye').bootstrapToggle('off')
+                renderGraph(undefined, false, true, false);
+            } else {
+                renderGraph(undefined, false, false, false);
+            }
+        })
+    });
 
 })(jQuery);

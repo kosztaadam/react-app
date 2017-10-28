@@ -29,6 +29,7 @@ import {render} from "react-dom";
 import Layout from './components/artist/Layout'
 import LayoutAlbum from './components/album/LayoutAlbum'
 import LayoutTrack from './components/track/LayoutTrack'
+import LayoutTag from './components/tag/LayoutTag'
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import artistApp from './reducers'
@@ -51,6 +52,7 @@ const Root = ({store}) => (
                 <Route path="/eloadok" component={Layout}/>
                 <Route path="/albumok" component={LayoutAlbum}/>
                 <Route path="/szamok" component={LayoutTrack}/>
+                <Route path="/cimkek" component={LayoutTag}/>
             </div>
         </Router>
     </Provider>

@@ -2,7 +2,13 @@ var graph = undefined;
 
 function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
 
-    console.log("lefut");
+    console.log("graf lefut");
+
+    //parse graph
+
+    if(simart !== undefined) {
+        graph = JSON.parse(simart);
+    }
 
     var $container = $('.graph'),
         width = $container.width(),
@@ -17,9 +23,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
 
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-    //parse graph
-    //  if(graph === undefined)
-    graph = JSON.parse(simart);
+
 
     var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().distance(100).id(function (d) {

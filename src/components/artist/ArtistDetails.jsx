@@ -33,7 +33,7 @@ class ArtistDetails extends React.Component {
     }
 
     render() {
-        const {getArtist, artistDetails, spotifyArtistDetails, youtubeVideoDetails} = this.props;
+        const {getArtist, getAlbum, getTag, artistDetails, spotifyArtistDetails, youtubeVideoDetails} = this.props;
 
         //Spotify details
 
@@ -120,7 +120,7 @@ class ArtistDetails extends React.Component {
                 <div className="artistDetails col-md-8 col-sm-12 firstHide">
                     <ul>
                         <div className="clearfix"/>
-                        <li>Legismertebb album: {topAlbum}</li>
+                        <li onClick={e => getAlbum(artistName, topAlbum)}>Legismertebb album: {topAlbum}</li>
                         <li>Hallgatók száma: {artistListeners}</li>
                         <li>Lejátszások száma: {artistPlayCount}</li>
                         <li>Spotify követők száma: {followers}</li>
@@ -144,7 +144,7 @@ class ArtistDetails extends React.Component {
                                     artistTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item.name}
-                                                   onClick={e => getArtist(item.name)}>{item.name}</li>
+                                                   onClick={e => getTag(item.name)}>{item.name}</li>
                                     })
                                 }
                                 <li>
@@ -158,7 +158,7 @@ class ArtistDetails extends React.Component {
                                     genres.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getArtist(item)}>{item}</li>
+                                                   onClick={e => getTag(item)}>{item}</li>
                                     })
                                 }
                                 <li>
@@ -172,7 +172,7 @@ class ArtistDetails extends React.Component {
                                     ytArtistTags.map(function (item) {
                                         let i = Math.floor((Math.random() * 4) + 1);
                                         return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getArtist(item)}>{item}</li>
+                                                   onClick={e => getTag(item)}>{item}</li>
                                     })
                                 }
                                 <li>

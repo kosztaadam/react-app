@@ -204,3 +204,11 @@
     border-color: #434857;
     cursor: pointer;
 }
+
+.searchedArtist {
+    cursor: pointer;
+}
+
+.btn {
+    cursor: pointer;
+}
