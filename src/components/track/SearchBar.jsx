@@ -8,7 +8,7 @@ class SearchBar extends React.Component {
             track: '',
             artist: '',
             similar: 3,
-            depth: 3
+            depth: 2
         };
 
         this.handleChange = this.handleChange.bind(this);

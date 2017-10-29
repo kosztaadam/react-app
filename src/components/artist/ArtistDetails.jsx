@@ -3,11 +3,22 @@ import $ from 'jquery';
 
 class ArtistDetails extends React.Component {
 
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps) {
         if ($(".firstHide").is(":hidden")) {
             $(".firstHide").show();
         }
         return true;
+
+       /* let loading = nextProps.loading[0];
+        console.log(loading);
+
+        if (loading === 'Loading') {
+            return false;
+        }
+        else {
+            return true;
+        }*/
+
     }
 
     componentDidMount() {
@@ -30,6 +41,52 @@ class ArtistDetails extends React.Component {
                 __html: wiki
             }
         }
+    }
+
+    ytTags(ytArtistTags, getTag) {
+        if (ytArtistTags == "") {
+            return;
+        }
+
+        return (
+            <li>Youtube címkék:
+                <ul className="tags">
+                    {
+                        ytArtistTags.map(function (item) {
+                            let i = Math.floor((Math.random() * 4) + 1);
+                            return <li className={"list-item color-" + i} key={item}
+                                       onClick={e => getTag(item)}>{item}</li>
+                        })
+                    }
+                    <li>
+                        <div className="clearfix"/>
+                    </li>
+                </ul>
+            </li>
+        )
+    }
+
+    spotifyTags(genres, getTag) {
+        if (genres == "") {
+            return;
+        }
+
+        return (
+            <li>Spotify címkék:
+                <ul className="tags">
+                    {
+                        genres.map(function (item) {
+                            let i = Math.floor((Math.random() * 4) + 1);
+                            return <li className={"list-item color-" + i} key={item}
+                                       onClick={e => getTag(item)}>{item}</li>
+                        })
+                    }
+                    <li>
+                        <div className="clearfix"/>
+                    </li>
+                </ul>
+            </li>
+        )
     }
 
     render() {
@@ -80,8 +137,10 @@ class ArtistDetails extends React.Component {
             ytViewCount = this.numberWithCommas(youtubeVideoDetails.statistics.viewCount);
             likeCount = this.numberWithCommas(youtubeVideoDetails.statistics.likeCount);
             dislikeCount = this.numberWithCommas(youtubeVideoDetails.statistics.dislikeCount);
-            ytArtistTags = youtubeVideoDetails.tags;
-            ytArtistTags = ytArtistTags.slice(0, 10);
+            if (youtubeVideoDetails.tags !== undefined) {
+                ytArtistTags = youtubeVideoDetails.tags;
+                ytArtistTags = ytArtistTags.slice(0, 10);
+            }
         }
 
         console.log("frissul a details");
@@ -152,34 +211,8 @@ class ArtistDetails extends React.Component {
                                 </li>
                             </ul>
                         </li>
-                        <li>Spotify címkék:
-                            <ul className="tags">
-                                {
-                                    genres.map(function (item) {
-                                        let i = Math.floor((Math.random() * 4) + 1);
-                                        return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getTag(item)}>{item}</li>
-                                    })
-                                }
-                                <li>
-                                    <div className="clearfix"/>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Youtube címkék:
-                            <ul className="tags">
-                                {
-                                    ytArtistTags.map(function (item) {
-                                        let i = Math.floor((Math.random() * 4) + 1);
-                                        return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getTag(item)}>{item}</li>
-                                    })
-                                }
-                                <li>
-                                    <div className="clearfix"/>
-                                </li>
-                            </ul>
-                        </li>
+                        {this.spotifyTags(genres, getTag)}
+                        {this.ytTags(ytArtistTags, getTag)}
                     </ul>
                 </div>
             </div>

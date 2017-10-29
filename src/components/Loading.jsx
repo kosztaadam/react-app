@@ -5,7 +5,7 @@ class Loading extends React.Component {
 
     render() {
 
-        if (this.props.loading === 'loading') {
+        if (this.props.loading[0] === 'Loading') {
             $(".right_container").hide();
             $(".loading").show();
         } else {

@@ -11,21 +11,33 @@
         });
 
         $('#fisheye').change(function () {
+            let href = location.href;
+            href = href.split('/')[3];
+
+            let trackGraph = false;
+            let tagGraph = false;
+
+            if(href == "cimkek") {
+                tagGraph = true
+            } else if (href == "szamok") {
+                trackGraph = true;
+            }
+
             if ($(this).prop('checked')) {
-                $('#highlight').bootstrapToggle('off')
-                renderGraph(undefined, true, false, false);
+                $('#highlight').bootstrapToggle('off');
+                addEffect(true, false, trackGraph, tagGraph);
             }
             else {
-                renderGraph(undefined, false, false, false);
+                addEffect(false, false, trackGraph, tagGraph);
             }
         });
 
         $('#highlight').change(function () {
             if ($(this).prop('checked')) {
-                $('#fisheye').bootstrapToggle('off')
-                renderGraph(undefined, false, true, false);
+                $('#fisheye').bootstrapToggle('off');
+                addEffect(false, true);
             } else {
-                renderGraph(undefined, false, false, false);
+                addEffect(false, false);
             }
         })
     });

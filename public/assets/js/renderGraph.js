@@ -1,14 +1,16 @@
 var graph = undefined;
 
-function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
+function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph, tagGraph) {
 
     console.log("graf lefut");
 
     //parse graph
 
-    if(simart !== undefined) {
+    if (simart !== undefined) {
         graph = JSON.parse(simart);
     }
+
+    $('.graph').empty();
 
     var $container = $('.graph'),
         width = $container.width(),
@@ -23,8 +25,6 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
 
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-
-
     var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().distance(100).id(function (d) {
             return d.id;
@@ -35,226 +35,277 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
     //update
     var update = function () {
 
-        //delete previous links & nodes
-        svg.selectAll("g.nodes").remove();
-        svg.selectAll("g.links").remove();
-        svg.selectAll("g.node").remove();
+            //delete previous links & nodes
+            svg.selectAll("g.nodes").remove();
+            svg.selectAll("g.links").remove();
+            svg.selectAll("g.node").remove();
 
-        //set links
-        var link = svg.append("g")
-            .attr("class", "links")
-            .selectAll("line")
-            .data(graph.links)
-            .enter().append("line")
-            .attr("stroke-width", function (d) {
-                return 2;
-            });
-
-        //set fisheye effect if fisheye enabled
-        if (fisheyeEnable) {
-            var fisheye = d3.fisheye.circular()
-                .radius(100)
-                .distortion(2);
-        }
-
-        var node;
-
-        node = svg.selectAll(".node")
-            .data(graph.nodes)
-            .enter().append("g")
-            .attr("class", "node")
-            .on("click", function (d) {
-                if (d3.event.shiftKey || d3.event.ctrlKey) {
-                    jQuery("#graphSearch").val(d.id);
-                    jQuery("#graphSearch").change();
-                    // getArtist(d.id);
-
-                    // console.log("aa");
-                    //location.href = '/artist/' + d.id;
-                    /* $("#artistname").text(d.id);
-                     $.get('/html/artist/' + d.id, function(res){
-                     $("#artistinfo").html(res);
-                     });
-                     $.get('/json/artist/' + d.id, function(res){
-                     var a = JSON.parse(res);
-                     for(var item in a.nodes) {
-                     if(findNode(a.nodes[item].id) == undefined)
-                     addNode(a.nodes[item].id, a.nodes[item].group + d.group);
-                     }
-                     for(var item in a.links) {
-                     if(findLink(a.links[item].source, a.links[item].target) == undefined)
-                     //console.log("asd");
-                     addLink(a.links[item].source, a.links[item].target);
-                     }
-
-                     update();
-                     });*/
-                }
-            })
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
-
-        node.append("circle")
-            .attr("r", function (d) {
-                if (d.group == 0)
-                    return 12;
-                else
-                    return 10;
-            })
-            .attr("fill", function (d) {
-                return color(d.group);
-            });
-
-        if(trackGraph) {
-            node.append("title")
-                .text(function (d) {
-                    return d.artist + " - " + d.id;
+            //set links
+            var link = svg.append("g")
+                .attr("class", "links")
+                .selectAll("line")
+                .data(graph.links)
+                .enter().append("line")
+                .attr("stroke-width", function (d) {
+                    return 2;
                 });
 
-            node.append("text")
-                .attr("dx", function (d) {
-                    if (d.id.length < 5)
-                        return d.id.length * 3;
-                    else
-                        return 10;
-                })
-                .attr("dy", ".35em")
-                .text(function (d) {
-                    return d.artist + " - " + d.id;
-                });
-        } else {
-            node.append("title")
-                .text(function (d) {
-                    return d.id;
-                });
+            //set fisheye effect if fisheye enabled
+            if (fisheyeEnable) {
+                var fisheye = d3.fisheye.circular()
+                    .radius(100)
+                    .distortion(2);
+            }
 
-            node.append("text")
-                .attr("dx", function (d) {
-                    if (d.id.length < 5)
-                        return d.id.length * 3;
-                    else
-                        return 10;
-                })
-                .attr("dy", ".35em")
-                .text(function (d) {
-                    return d.id
-                });
-        }
+            var node;
 
-        function ticked() {
-            link
-                .attr("x1", function (d) {
-                    return d.source.x;
-                })
-                .attr("y1", function (d) {
-                    return d.source.y;
-                })
-                .attr("x2", function (d) {
-                    return d.target.x;
-                })
-                .attr("y2", function (d) {
-                    return d.target.y;
-                });
-            node
-                .attr("transform", function (d) {
-                    return "translate(" + d.x + "," + d.y + ")"
-                });
-        }
+            node = svg.selectAll(".node")
+                .data(graph.nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .on("click", function (d) {
+                        if (d3.event.shiftKey || d3.event.ctrlKey) {
 
-        simulation
-            .nodes(graph.nodes)
-            .on("tick", ticked);
+                            /*$.get('/html/artist/' + d.id, function (res) {
+                             $("#artistinfo").html(res);
 
-        simulation.force("link")
-            .links(graph.links);
-
-        //mouseover different in fisheye and highlight effect
-        if (highlightEnable) {
-            node.on("mouseover", function (d) {
-                link.style('stroke-width', function (l) {
-                    if (d === l.source || d === l.target)
-                        return 3;
-                    else
-                        return 2;
-                });
-                link.style('stroke', function (l) {
-                    if (d === l.source || d === l.target)
-                        return "#000";
-                    else
-                        return "#999";
-                });
-                node.select("circle").style('r', function (a) {
-                    if (d == a) {
-                        return 12;
-                    }
-                    else {
-                        var neighborNodes = findNeighborNodes(d);
-                        for (var i in neighborNodes) {
-                            if (a.id == neighborNodes[i].id) {
-                                return 10;
+                             });*/
+                            if (trackGraph) {
+                                console.log(d.id);
+                                let number = Number($("#artist_number").val()) + 1;
+                                $.get('http://localhost:5000/json/track/' + d.id + "/" + number + "/1", function (res) {
+                                    var json = JSON.parse(res);
+                                    var a = JSON.parse(json.similarTrack);
+                                    for (var item in a.nodes) {
+                                        if (findNode(a.nodes[item].id) == undefined) {
+                                            addNode(a.nodes[item].id, a.nodes[item].group + d.group);
+                                            console.log(a.nodes[item].id);
+                                        }
+                                    }
+                                    for (var item in a.links) {
+                                        if (findLink(a.links[item].source, a.links[item].target) == undefined)
+                                        //console.log("asd");
+                                            addLink(a.links[item].source, a.links[item].target);
+                                    }
+                                });
+                            } else if(tagGraph) {
+                                console.log(d.id);
+                                let number = Number($("#artist_number").val()) + 1;
+                                $.get('http://localhost:5000/json/tag/' + d.id + "/" + number + "/1", function (res) {
+                                    var json = JSON.parse(res);
+                                    var a = JSON.parse(json.similarTagsList);
+                                    for (var item in a.nodes) {
+                                        if (findNode(a.nodes[item].id) == undefined) {
+                                            addNode(a.nodes[item].id, a.nodes[item].group + d.group);
+                                            console.log(a.nodes[item].id);
+                                        }
+                                    }
+                                    for (var item in a.links) {
+                                        if (findLink(a.links[item].source, a.links[item].target) == undefined)
+                                        //console.log("asd");
+                                            addLink(a.links[item].source, a.links[item].target);
+                                    }
+                                });
+                            } else {
+                                console.log(d.id);
+                                let number = Number($("#artist_number").val()) + 1;
+                                $.get('http://localhost:5000/json/artist/' + d.id + "/" + number + "/1", function (res) {
+                                    var json = JSON.parse(res);
+                                    var a = JSON.parse(json.similarArtissList);
+                                    for (var item in a.nodes) {
+                                        if (findNode(a.nodes[item].id) == undefined) {
+                                            addNode(a.nodes[item].id, a.nodes[item].group + d.group);
+                                            console.log(a.nodes[item].id);
+                                        }
+                                    }
+                                    for (var item in a.links) {
+                                        if (findLink(a.links[item].source, a.links[item].target) == undefined)
+                                        //console.log("asd");
+                                            addLink(a.links[item].source, a.links[item].target);
+                                    }
+                                });
                             }
+
+                            // update();
                         }
-                        return 6;
                     }
-                });
-                node.style('stroke-width', function (l) {
-                    if (d == l) {
-                        return 2;
-                    }
+                )
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+
+            node.append("circle")
+                .attr("r", function (d) {
+                    if (d.group == 0)
+                        return 12;
                     else
-                        return 0;
-                });
-                node.select("text").style('font-weight', function (l) {
-                    if (d == l) {
-                        return 'bold';
-                    }
-                    else
-                        return 'normal';
-                });
-            });
-        }
-
-        if (fisheyeEnable) {
-
-            d3.select("svg").on("mousemove", function () {
-
-                fisheye.focus(d3.mouse(this));
-
-                node.each(function (d) {
-                    d.fisheye = fisheye(d);
+                        return 10;
                 })
-                    .attr("transform", function (d) {
-                        return "translate(" + d.fisheye.x + "," + d.fisheye.y + ")";
-                    })
-                    .attr("r", function (d) {
-                        return d.fisheye.z * 4.5;
-                    })
-                    .attr("font-weight", function (d) {
-                        return "bold";
+                .attr("fill", function (d) {
+                    return color(d.group);
+                });
+
+            if (trackGraph) {
+                node.append("title")
+                    .text(function (d) {
+                        return d.artist + " - " + d.id;
                     });
 
-                link.attr("x1", function (d) {
-                    return d.source.fisheye.x;
-                })
+                node.append("text")
+                    .attr("dx", function (d) {
+                        if (d.id.length < 5)
+                            return d.id.length * 3;
+                        else
+                            return 10;
+                    })
+                    .attr("dy", ".35em")
+                    .text(function (d) {
+                        return d.artist + " - " + d.id;
+                    });
+            } else {
+                node.append("title")
+                    .text(function (d) {
+                        return d.id;
+                    });
+
+                node.append("text")
+                    .attr("dx", function (d) {
+                        if (d.id.length < 5)
+                            return d.id.length * 3;
+                        else
+                            return 10;
+                    })
+                    .attr("dy", ".35em")
+                    .text(function (d) {
+                        return d.id
+                    });
+            }
+
+            function ticked() {
+                link
+                    .attr("x1", function (d) {
+                        return d.source.x;
+                    })
                     .attr("y1", function (d) {
-                        return d.source.fisheye.y;
+                        return d.source.y;
                     })
                     .attr("x2", function (d) {
-                        return d.target.fisheye.x;
+                        return d.target.x;
                     })
                     .attr("y2", function (d) {
-                        return d.target.fisheye.y;
+                        return d.target.y;
                     });
-            });
-        }
+                node
+                    .attr("transform", function (d) {
+                        return "translate(" + d.x + "," + d.y + ")"
+                    });
+            }
 
-    };
+            simulation
+                .nodes(graph.nodes)
+                .on("tick", ticked);
+
+            simulation.force("link")
+                .links(graph.links);
+
+            //mouseover different in fisheye and highlight effect
+            if (highlightEnable) {
+                node.on("mouseover", function (d) {
+                    link.style('stroke-width', function (l) {
+                        if (d === l.source || d === l.target)
+                            return 3;
+                        else
+                            return 2;
+                    });
+                    link.style('stroke', function (l) {
+                        if (d === l.source || d === l.target)
+                            return "#d9d9d9";
+                        else
+                            return "#444";
+                    });
+                    node.select("circle").style('r', function (a) {
+                        if (d == a) {
+                            return 14;
+                        }
+                        else {
+                            var neighborNodes = findNeighborNodes(d);
+                            for (var i in neighborNodes) {
+                                if (a.id == neighborNodes[i].id) {
+                                    return 11;
+                                }
+                            }
+                            return 6;
+                        }
+                    });
+                    node.select("title").html("");
+                    node.style('stroke-width', function (l) {
+                        if (d == l) {
+                            return 3;
+                        }
+                        else
+                            return 0;
+                    });
+                    node.select("text").style('font-weight', function (l) {
+                        if (d == l) {
+                            return 'bold';
+                        }
+                        else
+                            return 'normal';
+                    });
+                    node.select("text").attr('dx', function (l) {
+                        if (d == l) {
+                            return 15;
+                        }
+                        else
+                            return 10;
+                    });
+                });
+            }
+
+            if (fisheyeEnable) {
+
+                d3.select("svg").on("mousemove", function () {
+
+                    fisheye.focus(d3.mouse(this));
+
+                    node.each(function (d) {
+                        d.fisheye = fisheye(d);
+                        $(this).find("circle").attr("r", function () {
+                            return d.fisheye.z * 7;
+                        });
+                        $(this).find("text").attr("dx", function () {
+                            return d.fisheye.z * 5 * 1.5;
+                        });
+                        $(this).find("text").attr("style", function () {
+                            return "font-size:" + d.fisheye.z * 10 + "px";
+                        });
+                    })
+                        .attr("transform", function (d) {
+                            return "translate(" + d.fisheye.x + "," + d.fisheye.y + ")";
+                        });
+
+                    link.attr("x1", function (d) {
+                        return d.source.fisheye.x;
+                    })
+                        .attr("y1", function (d) {
+                            return d.source.fisheye.y;
+                        })
+                        .attr("x2", function (d) {
+                            return d.target.fisheye.x;
+                        })
+                        .attr("y2", function (d) {
+                            return d.target.fisheye.y;
+                        });
+                });
+            }
+
+        }
+    ;
 
     update();
 
-    // Add and remove elements on the graph object
+// Add and remove elements on the graph object
     function addNode(id, group) {
         graph.nodes.push({
             "id": id,
@@ -319,7 +370,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
         for (var i in graph.links) {
             if (graph.links[i]["source"].id == source) {
                 if (graph.links[i]["target"].id == target) {
-                    console.log(graph.links[i]["source"].id);
+                    // console.log(graph.links[i]["source"].id);
                     return graph.links[i];
                 }
             }
@@ -379,6 +430,6 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph) {
 
 }
 
-function addEffect(fisheyeEnable, hightlightEnable) {
-    renderGraph(graph, fisheyeEnable, hightlightEnable);
+function addEffect(fisheyeEnable, hightlightEnable, trackGraph, tagGraph) {
+    renderGraph(undefined, fisheyeEnable, hightlightEnable, trackGraph, tagGraph);
 }

@@ -22,7 +22,7 @@ class TagGraph extends React.Component {
                 $('.graph').css({'height': '400px'});
             }
 
-            let embedCode = '<script type="text/javascript">renderGraph(' + similarTag + ', false, false); </script>';
+            let embedCode = '<script type="text/javascript">renderGraph(' + similarTag + ', false, false, false, true); </script>';
             $('.graph').fadeIn();
             $('.graph').empty();
             $('.graph').append(embedCode);

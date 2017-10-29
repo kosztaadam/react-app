@@ -33,7 +33,7 @@ class TrackDetails extends React.Component {
     }
 
     render() {
-        const {getTag, getTrack, trackDetails, spotifytrackDetails, youtubeVideoDetails} = this.props;
+        const {getTag, getAlbum, getTrack, trackDetails, spotifytrackDetails, youtubeVideoDetails} = this.props;
 
         //Spotify details
 
@@ -60,7 +60,9 @@ class TrackDetails extends React.Component {
             artistName = trackDetails[lastTrackItem].artistName;
             trackName = trackDetails[lastTrackItem].trackName;
             albumName = trackDetails[lastTrackItem].albumName;
-            similarTrack = JSON.parse(trackDetails[lastTrackItem].similarTrack).nodes;
+            if(trackDetails[lastTrackItem].similarTrack !== undefined) {
+                similarTrack = JSON.parse(trackDetails[lastTrackItem].similarTrack).nodes;
+            }
             trackTags = JSON.parse(trackDetails[lastTrackItem].trackTags);
             albumImage = trackDetails[lastTrackItem].albumImage;
             trackListener = this.numberWithCommas(trackDetails[lastTrackItem].trackListeners);
@@ -119,7 +121,7 @@ class TrackDetails extends React.Component {
                 <div className="artistDetails col-md-8 col-sm-12 firstHide">
                     <ul>
                         <div className="clearfix"/>
-                        <li>Album: {albumName}</li>
+                        <li onClick={e => getAlbum(artistName, albumName)}>Album: {albumName}</li>
                         <li>Hossz: {minutes}:{seconds}</li>
                         <li>Hallgatók száma: {trackListener}</li>
                         <li>Lejátszások száma: {trackPlayCount}</li>

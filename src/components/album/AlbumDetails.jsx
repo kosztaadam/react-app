@@ -58,6 +58,29 @@ class albumDetails extends React.Component {
         return parts.join(".");
     }
 
+    ytTags(ytArtistTags, getTag) {
+        if (ytArtistTags == "") {
+            return;
+        }
+
+        return (
+            <li>Youtube címkék:
+                <ul className="tags">
+                    {
+                        ytArtistTags.map(function (item) {
+                            let i = Math.floor((Math.random() * 4) + 1);
+                            return <li className={"list-item color-" + i} key={item}
+                                       onClick={e => getTag(item)}>{item}</li>
+                        })
+                    }
+                    <li>
+                        <div className="clearfix"/>
+                    </li>
+                </ul>
+            </li>
+        )
+    }
+
     render() {
         const {getTag, getTrack, albumDetails} = this.props;
         let {spotifyAlbumDetails, youtubeVideoDetails} = this.props;
@@ -117,8 +140,10 @@ class albumDetails extends React.Component {
             ytViewCount = this.numberWithCommas(youtubeVideoDetails.statistics.viewCount);
             likeCount = this.numberWithCommas(youtubeVideoDetails.statistics.likeCount);
             dislikeCount = this.numberWithCommas(youtubeVideoDetails.statistics.dislikeCount);
-            ytArtistTags = youtubeVideoDetails.tags;
-            ytArtistTags = ytArtistTags.slice(0, 10);
+            if (youtubeVideoDetails.tags !== undefined) {
+                ytArtistTags = youtubeVideoDetails.tags;
+                ytArtistTags = ytArtistTags.slice(0, 10);
+            }
         }
 
         console.log("frissul a details");
@@ -185,20 +210,7 @@ class albumDetails extends React.Component {
                                 </li>
                             </ul>
                         </li>
-                        <li>Youtube címkék:
-                            <ul className="tags">
-                                {
-                                    ytArtistTags.map(function (item) {
-                                        let i = Math.floor((Math.random() * 4) + 1);
-                                        return <li className={"list-item color-" + i} key={item}
-                                                   onClick={e => getTag(item)}>{item}</li>
-                                    })
-                                }
-                                <li>
-                                    <div className="clearfix"/>
-                                </li>
-                            </ul>
-                        </li>
+                        {this.ytTags(ytArtistTags, getTag)}
                         <li>Leírás: <span dangerouslySetInnerHTML={ this.htmlText(wiki) }/></li>
                     </ul>
                 </div>

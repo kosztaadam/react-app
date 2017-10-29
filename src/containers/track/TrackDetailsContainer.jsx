@@ -18,7 +18,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         getTag: (tag) => {
             window.location.href = "/cimkek?tag=" + tag;
-        }
+        },
+        getAlbum: (artist, album) => {
+            window.location.href = "/albumok?artist=" + artist + "&album=" + album;
+        },
     }
 };
 

@@ -5,7 +5,7 @@ import ArtistDetails from '../../components/artist/ArtistDetails';
 const mapStateToProps = (state, ownProps) => {
     return {
         artistDetails: state.artistDetails,
-        loading: state.loading.loading,
+        loading: state.loading,
         spotifyArtistDetails: state.spotifyArtistDetails.artistDetails,
         youtubeVideoDetails: state.youtubeVideoDetails.ytVideoDetails
     }

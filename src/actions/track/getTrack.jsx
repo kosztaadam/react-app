@@ -16,6 +16,8 @@ function fetchTrack(artistName, trackName, similarTrackNumber, depthNumber) {
         url = "http://localhost:5000/json/track/" + artistName + "/" + trackName + "/" + similarTrackNumber + "/" + depthNumber;
     }
 
+    console.log(url);
+
     return fetch(url)
         .then(response => {
             return response.json()

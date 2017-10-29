@@ -50,21 +50,39 @@ class ArtistGraph extends React.Component {
             similarArtist = artistDetails[lastArtistItem].similarArtist;
             similarArtist = JSON.stringify(similarArtist);
 
-            if (artistDetails[lastArtistItem].limit > 4 || artistDetails[lastArtistItem].deep > 4) {
-                $('.graph').css({'height': '1000px'});
-            }
-            else if (artistDetails[lastArtistItem].limit > 3 || artistDetails[lastArtistItem].deep > 3) {
-                $('.graph').css({'height': '800px'});
+            if ($(".graph").is(":hidden")) {
+                setTimeout(function () {
+                    if (artistDetails[lastArtistItem].limit > 4 || artistDetails[lastArtistItem].deep > 4) {
+                        $('.graph').css({'height': '1000px'});
+                    }
+                    else if (artistDetails[lastArtistItem].limit > 3 || artistDetails[lastArtistItem].deep > 3) {
+                        $('.graph').css({'height': '800px'});
+                    } else {
+                        $('.graph').css({'height': '400px'});
+                    }
+
+                    let embedCode = '<script type="text/javascript">renderGraph(' + similarArtist + ', false, false); </script>';
+                    $('.graph').fadeIn();
+                    $('.graph').empty();
+                    $('.graph').append(embedCode);
+                }, 300);
             } else {
-                $('.graph').css({'height': '400px'});
+                if (artistDetails[lastArtistItem].limit > 4 || artistDetails[lastArtistItem].deep > 4) {
+                    $('.graph').css({'height': '1000px'});
+                }
+                else if (artistDetails[lastArtistItem].limit > 3 || artistDetails[lastArtistItem].deep > 3) {
+                    $('.graph').css({'height': '800px'});
+                } else {
+                    $('.graph').css({'height': '400px'});
+                }
+
+                let embedCode = '<script type="text/javascript">renderGraph(' + similarArtist + ', false, false); </script>';
+                $('.graph').fadeIn();
+                $('.graph').empty();
+                $('.graph').append(embedCode);
             }
 
-            let embedCode = '<script type="text/javascript">renderGraph(' + similarArtist + ', false, false); </script>';
-            $('.graph').fadeIn();
-            $('.graph').empty();
-            $('.graph').append(embedCode);
-            //window.renderGraphFromReact(similarArtist);
-            //renderGraph(similarArtist, false, false);
+
         }
 
         return (

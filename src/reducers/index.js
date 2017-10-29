@@ -13,7 +13,7 @@ import {
 } from '../actions/consts';
 
 const initialState = [];
-const loadingInitialState = ['success'];
+const loadingInitialState = ['Success'];
 
 function loadingReducer(state = loadingInitialState, action) {
     switch (action.type) {

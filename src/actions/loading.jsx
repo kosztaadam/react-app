@@ -4,7 +4,7 @@ export function loadingData() {
     console.log(LOADING_ARTIST);
     return {
         type: LOADING_ARTIST,
-        loading: 'loading'
+        loading: 'Loading'
     }
 }
 
@@ -12,6 +12,6 @@ export function loadingDataSuccess() {
     console.log(LOADING_ARTIST_FINISHED);
     return {
         type: LOADING_ARTIST_FINISHED,
-        loading: 'success'
+        loading: 'Success'
     }
 }

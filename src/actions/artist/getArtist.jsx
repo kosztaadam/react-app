@@ -25,8 +25,8 @@ export function getArtist(artistName, similarArtistNumber, depthNumber) {
         dispatch(getYoutubeArtist(artistName));
         return fetchArtist(artistName, similarArtistNumber, depthNumber)
             .then(data => {
-                dispatch(loadingDataSuccess());
                 dispatch(setArtistDetails(data))
+                dispatch(loadingDataSuccess());
             })
             .catch(error => {
                 throw error;
