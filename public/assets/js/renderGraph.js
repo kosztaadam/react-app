@@ -73,7 +73,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph, tagGrap
                             if (trackGraph) {
                                 console.log(d.id);
                                 let number = Number($("#artist_number").val()) + 1;
-                                $.get('http://localhost:5000/json/track/' + d.id + "/" + number + "/1", function (res) {
+                                $.get('http://localhost:3000/lastfm/track/' + d.id + "/" + number + "/1", function (res) {
                                     var json = JSON.parse(res);
                                     var a = JSON.parse(json.similarTrack);
                                     for (var item in a.nodes) {
@@ -91,7 +91,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph, tagGrap
                             } else if(tagGraph) {
                                 console.log(d.id);
                                 let number = Number($("#artist_number").val()) + 1;
-                                $.get('http://localhost:5000/json/tag/' + d.id + "/" + number + "/1", function (res) {
+                                $.get('http://localhost:3000/lastfm/tag/' + d.id + "/" + number + "/1", function (res) {
                                     var json = JSON.parse(res);
                                     var a = JSON.parse(json.similarTagsList);
                                     for (var item in a.nodes) {
@@ -109,7 +109,7 @@ function renderGraph(simart, fisheyeEnable, highlightEnable, trackGraph, tagGrap
                             } else {
                                 console.log(d.id);
                                 let number = Number($("#artist_number").val()) + 1;
-                                $.get('http://localhost:5000/json/artist/' + d.id + "/" + number + "/1", function (res) {
+                                $.get('http://localhost:3000/lastfm/artist/' + d.id + "/" + number + "/1", function (res) {
                                     var json = JSON.parse(res);
                                     var a = JSON.parse(json.similarArtissList);
                                     for (var item in a.nodes) {

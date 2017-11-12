@@ -4,10 +4,10 @@ import {setSpotifyTrackDetails} from "./setSpotifyTrackDetails";
 function fetchTrack(artistName, trackName) {
     let url = "";
     if (artistName === "") {
-        url = "http://localhost:5000/spotify/track/" + trackName;
+        url = "http://localhost:3000/spotify/track/" + trackName;
     }
     else {
-        url = "http://localhost:5000/spotify/track/" + artistName + "/" + trackName;
+        url = "http://localhost:3000/spotify/track/" + artistName + "/" + trackName;
     }
 
     return fetch(url)

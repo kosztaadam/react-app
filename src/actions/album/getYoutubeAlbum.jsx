@@ -4,9 +4,9 @@ import {setYoutubeVideoDetails} from "../artist/setYoutubeVideoDetails";
 function fetchAlbum(artistName, albumName) {
     let url = "";
     if (artistName !== "") {
-        url = "http://localhost:5000/youtube/album/" + artistName + "/" + albumName;
+        url = "http://localhost:3000/youtube/album/" + artistName + "/" + albumName;
     } else {
-        url = "http://localhost:5000/youtube/album/" + albumName;
+        url = "http://localhost:3000/youtube/album/" + albumName;
     }
 
     return fetch(url)

@@ -245,7 +245,7 @@ export default albumDetails;
 
  getArtist(artist) {
  $.ajax({
- url: 'http://localhost:5000/json/artist/' + artist,
+ url: 'http://localhost:3000/lastfm/artist/' + artist,
  beforeSend: function () {
  $(".albumDetails").hide();
  $(".spinner").fadeIn();

@@ -5,7 +5,7 @@ import {getSpotifyTag} from "./getSpotifyTag";
 import {setTagDetails} from "./setTagDetails";
 
 function fetchTag(tagName, similarTagNumber, depthNumber) {
-    const url = "http://localhost:5000/json/tag/" + tagName + "/" + similarTagNumber + "/" + depthNumber;
+    const url = "http://localhost:3000/lastfm/tag/" + tagName + "/" + similarTagNumber + "/" + depthNumber;
     console.log(url);
 
     return fetch(url)

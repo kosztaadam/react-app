@@ -5,10 +5,10 @@ function fetchAlbum(artistName, albumName) {
 
     let url = "";
     if (artistName === "") {
-        url = "http://localhost:5000/spotify/album/" + albumName;
+        url = "http://localhost:3000/spotify/album/" + albumName;
     }
     else {
-        url = "http://localhost:5000/spotify/album/" + artistName + "/" + albumName;
+        url = "http://localhost:3000/spotify/album/" + artistName + "/" + albumName;
     }
 
     return fetch(url)

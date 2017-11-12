@@ -16,7 +16,7 @@ class Nav extends React.Component {
     componentDidMount() {
         let tag = this.getParameterByName('tag');
         if (tag !== null) {
-            this.props.getTag(tag, 3, 3);
+            this.props.getTag(tag, 3, 2);
         }
     }
 

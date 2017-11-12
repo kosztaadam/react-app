@@ -7,11 +7,11 @@ import {getYoutubeAlbum} from "./getYoutubeAlbum";
 function fetchAlbum(artistName, albumName) {
     let url = "";
     if(artistName === "") {
-        url = "http://localhost:5000/json/album/" + albumName;
+        url = "http://localhost:3000/lastfm/album/" + albumName;
         console.log(albumName);
     }
     else {
-        url = "http://localhost:5000/json/album/" + artistName + "/" + albumName;
+        url = "http://localhost:3000/lastfm/album/" + artistName + "/" + albumName;
     }
     return fetch(url)
         .then(response => {

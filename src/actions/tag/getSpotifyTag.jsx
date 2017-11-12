@@ -2,7 +2,7 @@ import {setSpotifyTrack} from "../artist/setSpotifyTrack";
 import {setSpotifyTagDetails} from "./setSpotifyDetails";
 
 function fetchTag(tagName) {
-    const url = "http://localhost:5000/spotify/tag/" + tagName;
+    const url = "http://localhost:3000/spotify/tag/" + tagName;
     console.log(url);
 
     return fetch(url)

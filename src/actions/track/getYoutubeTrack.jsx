@@ -4,9 +4,9 @@ import {setYoutubeVideoDetails} from "../artist/setYoutubeVideoDetails";
 function fetchTrack(artistName, trackName) {
     let url = "";
     if (artistName !== "") {
-        url = "http://localhost:5000/youtube/track/" + artistName + "/" + trackName;
+        url = "http://localhost:3000/youtube/track/" + artistName + "/" + trackName;
     } else {
-        url = "http://localhost:5000/youtube/track/" + trackName;
+        url = "http://localhost:3000/youtube/track/" + trackName;
     }
 
     return fetch(url)

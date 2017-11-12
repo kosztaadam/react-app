@@ -6,14 +6,14 @@ import {setTrackDetails} from "./setTrackDetails";
 
 
 function fetchTrack(artistName, trackName, similarTrackNumber, depthNumber) {
-    //const url = "http://localhost:5000/json/track/" + artistName + "/" + similarTrackNumber + "/" + depthNumber;
+    //const url = "http://localhost:3000/lastfm/track/" + artistName + "/" + similarTrackNumber + "/" + depthNumber;
 
     let url = "";
     if (artistName === "") {
-        url = "http://localhost:5000/json/track/" + trackName + "/" + similarTrackNumber + "/" + depthNumber;
+        url = "http://localhost:3000/lastfm/track/" + trackName + "/" + similarTrackNumber + "/" + depthNumber;
     }
     else {
-        url = "http://localhost:5000/json/track/" + artistName + "/" + trackName + "/" + similarTrackNumber + "/" + depthNumber;
+        url = "http://localhost:3000/lastfm/track/" + artistName + "/" + trackName + "/" + similarTrackNumber + "/" + depthNumber;
     }
 
     console.log(url);

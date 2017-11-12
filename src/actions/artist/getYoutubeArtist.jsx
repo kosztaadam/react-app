@@ -2,7 +2,7 @@ import {setYoutubeArtist} from "./setYoutubeArtist";
 import {setYoutubeVideoDetails} from "./setYoutubeVideoDetails";
 
 function fetchArtist(artistName) {
-    const url = "http://localhost:5000/youtube/" + artistName;
+    const url = "http://localhost:3000/youtube/" + artistName;
 
     return fetch(url)
         .then(response => {

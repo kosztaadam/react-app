@@ -3,6 +3,27 @@ import SearchBarContainer from "../../containers/artist/SearchBarContainer";
 
 class Nav extends React.Component {
 
+    getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    componentDidMount() {
+        let artist = this.getParameterByName('artist');
+        let similar = this.getParameterByName('similar');
+        let deep = this.getParameterByName('deep');
+        if (artist !== null && similar !== null && deep !== null) {
+            this.props.getArtist(artist, similar, deep);
+        } else if (artist !== null) {
+            this.props.getArtist(artist, 3, 2);
+        }
+    }
+
     render() {
         const {getArtist} = this.props;
 

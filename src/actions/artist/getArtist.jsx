@@ -5,7 +5,7 @@ import {getSpotifyArtist} from "./getSpotifyArtist"
 import {getYoutubeArtist} from "./getYoutubeArtist"
 
 function fetchArtist(artistName, similarArtistNumber, depthNumber) {
-    const url = "http://localhost:5000/json/artist/" + artistName + "/" + similarArtistNumber + "/" + depthNumber;
+    const url = "http://localhost:3000/lastfm/artist/" + artistName + "/" + similarArtistNumber + "/" + depthNumber;
     console.log(url);
 
     return fetch(url)

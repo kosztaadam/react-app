@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getTag: (tag) => {
-            dispatch(getTag(tag));
+        getTag: (tag, similar, depth) => {
+            dispatch(getTag(tag, similar, depth));
         }
     }
 };

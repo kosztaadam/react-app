@@ -3,7 +3,7 @@ import {setSpotifyArtistDetails} from "./setSpotifyArtistDetails";
 
 
 function fetchArtist(artistName) {
-    const url = "http://localhost:5000/spotify/" + artistName;
+    const url = "http://localhost:3000/spotify/" + artistName;
 
     return fetch(url)
         .then(response => {

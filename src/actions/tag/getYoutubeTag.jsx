@@ -2,7 +2,7 @@ import {setYoutubeArtist} from "../artist/setYoutubeArtist";
 import {setYoutubeVideoDetails} from "../artist/setYoutubeVideoDetails";
 
 function fetchTag(tagName) {
-    const url = "http://localhost:5000/youtube/tag/" + tagName;
+    const url = "http://localhost:3000/youtube/tag/" + tagName;
 
     return fetch(url)
         .then(response => {

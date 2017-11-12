@@ -17,9 +17,9 @@ class Nav extends React.Component {
         let artist = this.getParameterByName('artist');
         let track = this.getParameterByName('track');
         if(artist !== null) {
-            this.props.getTrack(artist, track, 3, 3);
+            this.props.getTrack(artist, track, 3, 2);
         } else if(track !== null) {
-            this.props.getTrack(track, 3, 3);
+            this.props.getTrack(track, 3, 2);
         }
     }
 
